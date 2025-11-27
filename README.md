@@ -26,4 +26,58 @@ El ecosistema de Zuap utiliza una arquitectura distribuida que integra la aplica
 * [cite_start]**Gestión de Pagos y Planes:** Compra de planes de suscripción y recargas de saldo (Wallet) integrados con Odoo[cite: 95, 97].
 * [cite_start]**Estadísticas de Ahorro:** Cálculo del ahorro monetario y reducción de CO2 comparado con motos de combustión[cite: 113, 115].
 
+## Arquitectura del Proyecto
+
+La arquitectura del proyecto sigue los principios de Clean Architecture, organizada modularmente por "features". Cada carpeta en lib/features/ representa un dominio de negocio específico de Zuap:
+
+lib/
+├── main.dart                   
+├── core/                       
+│   ├── config/                
+│   ├── errors/                
+│   ├── network/                
+│   ├── storage/                
+│   └── utils/                 
+│
+├── features/                   
+│   │
+│   ├── auth/                   
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/       
+│   │
+│   ├── stations/               
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/       
+│   │
+│   ├── swap/                   
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/       
+│   │
+│   ├── telemetry/              
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/       
+│   │
+│   ├── wallet/                 
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/       
+│   │
+│   ├── vehicles/              
+│   │   ├── data/               
+│   │   ├── domain/             
+│   │   └── presentation/       
+│   │
+│   └── profile/                
+│       ├── data/              
+│       ├── domain/             
+│       └── presentation/       
+│
+└── shared/                     
+    ├── widgets/                
+    └── theme/                 
+
 **Software Company**: Digilab
