@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -95,12 +95,29 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 30),
                     Align(
                       alignment: AlignmentGeometry.topRight,
-                      child: Text(
-                        '¿Olvidaste tu contraseña?',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: AppTheme.bgColor,
+                          foregroundColor: AppTheme.bgColor,
+                          overlayColor: AppTheme.bgColor,
+                          side: BorderSide.none,
+                          shadowColor: AppTheme.bgColor,
+                          surfaceTintColor: Colors.transparent,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/reset_password_screen',
+                          );
+                        },
+                        child: Text(
+                          '¿Olvidaste tu contraseña?',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -138,7 +155,9 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           backgroundColor: AppTheme.bgColor,
