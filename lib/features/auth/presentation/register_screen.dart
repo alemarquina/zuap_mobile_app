@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide DropdownButton;
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/dropdown_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -9,6 +10,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String? _selectedDocument;
+  String? _selectedModelScooter;
+
+  final List<String> _docTypes = ['DNI', 'Carnét de extranjería'];
+  final List<String> _scooterTypes = ['Flex 3.5X', 'Raptor 1.2'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           labelText: 'Correo',
                           labelStyle: TextStyle(
-                            color: Colors.grey,
+                            color: AppTheme.darkGrayColor,
                             fontWeight: FontWeight.w100,
                             letterSpacing: 0,
                           ),
@@ -97,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           labelText: 'Nombres',
                           labelStyle: TextStyle(
-                            color: Colors.grey,
+                            color: AppTheme.darkGrayColor,
                             fontWeight: FontWeight.w100,
                             letterSpacing: 0,
                           ),
@@ -124,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           labelText: 'Apellidos',
                           labelStyle: TextStyle(
-                            color: Colors.grey,
+                            color: AppTheme.darkGrayColor,
                             fontWeight: FontWeight.w100,
                             letterSpacing: 0,
                           ),
@@ -137,31 +144,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       SizedBox(height: 30),
-                      TextField(
-                        cursorColor: AppTheme.primaryColor,
-                        enabled: true,
-                        decoration: InputDecoration(
-                          focusColor: AppTheme.primaryColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          labelText: 'Tipo de documento',
-                          labelStyle: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w100,
-                            letterSpacing: 0,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                      DropdownButton(
+                        labelText: 'Tipo de documento',
+                        options: _docTypes,
+                        value: _selectedDocument,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedDocument = newValue;
+                          });
+                        },
                       ),
                       SizedBox(height: 30),
                       TextField(
@@ -178,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           labelText: 'Número de Documento',
                           labelStyle: TextStyle(
-                            color: Colors.grey,
+                            color: AppTheme.darkGrayColor,
                             fontWeight: FontWeight.w100,
                             letterSpacing: 0,
                           ),
@@ -210,32 +201,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    TextField(
-                      cursorColor: AppTheme.primaryColor,
-                      enabled: true,
-                      decoration: InputDecoration(
-                        focusColor: AppTheme.primaryColor,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppTheme.primaryColor,
-                            width: 2.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-
-                        hintText: 'Flex 3.5x',
-                        labelStyle: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w100,
-                          letterSpacing: 0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                    DropdownButton(
+                      labelText: 'Modelo',
+                      options: _scooterTypes,
+                      value: _selectedModelScooter,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedModelScooter = newValue;
+                        });
+                      },
                     ),
                     SizedBox(height: 30),
                     Container(
@@ -264,11 +238,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
-
-                        hintText: 'Número de Placa',
+                        labelText: 'Número de placa',
                         labelStyle: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w100,
+                          color: AppTheme.darkGrayColor,
                           letterSpacing: 0,
                         ),
                         filled: true,

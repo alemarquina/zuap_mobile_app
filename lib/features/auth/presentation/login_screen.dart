@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         labelText: 'Usuario',
                         labelStyle: TextStyle(
-                          color: Colors.grey,
+                          color: AppTheme.darkGrayColor,
                           fontWeight: FontWeight.w100,
                           letterSpacing: 0,
                         ),
@@ -81,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         labelText: 'Contraseña',
                         labelStyle: TextStyle(
-                          color: Colors.grey,
+                          color: AppTheme.darkGrayColor,
                           letterSpacing: 0,
                         ),
                         filled: true,
@@ -132,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
-                          backgroundColor: AppTheme.bgColor,
+                          backgroundColor: AppTheme.primaryColor,
                           minimumSize: Size(double.infinity, 67),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(35),
@@ -147,6 +147,7 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            color: Colors.white,
                           ),
                         ),
                       ),
