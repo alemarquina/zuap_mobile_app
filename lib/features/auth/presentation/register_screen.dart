@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide DropdownButton;
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
-import 'package:zuap_mobile_app/shared/widgets/dropdown_button.dart';
+import 'package:zuap_mobile_app/features/auth/presentation/widgets/dropdown_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
