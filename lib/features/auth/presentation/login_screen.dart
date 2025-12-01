@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/core/routes/app_routes.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 
@@ -10,12 +11,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _useNameController = TextEditingController();
+  final _userNameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _useNameController.dispose();
+    _userNameController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     CustTextField(
                       labelText: 'Usuario',
-                      controller: _useNameController,
+                      controller: _userNameController,
                       keyboardType: TextInputType.name,
                     ),
                     SizedBox(height: 30),
@@ -105,7 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/home_map_screen');
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
                           backgroundColor: AppTheme.primaryColor,

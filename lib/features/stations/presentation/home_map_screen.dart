@@ -1,0 +1,137 @@
+// lib/features/stations/presentation/home_map_page.dart
+
+import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/widgets/map_overlay_buttons.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_promo_banner.dart';
+import 'package:zuap_mobile_app/features/telemetry/presentation/widgets/battery_level_indicator.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_stats_card.dart';
+import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+
+class HomeMapPage extends StatefulWidget {
+  const HomeMapPage({super.key});
+
+  @override
+  State<HomeMapPage> createState() => _HomeMapPageState();
+}
+
+class _HomeMapPageState extends State<HomeMapPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Static Map Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/map_background.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+
+          // Map Markers/Pins Overlay
+          Positioned(
+            top: 200,
+            left: MediaQuery.of(context).size.width * 0.4,
+            child: Icon(
+              Icons.location_pin,
+              color: AppTheme.primaryColor,
+              size: 40,
+            ),
+          ),
+
+          Positioned(
+            top: 350,
+            right: 60,
+            child: Icon(Icons.location_pin, color: Colors.green, size: 32),
+          ),
+
+          // Overlay Buttons (Menu & Search)
+          const Positioned(top: 50, right: 16, child: MapOverlayButtons()),
+
+          // Bottom Panel with Battery Details
+          Positioned(left: 0, right: 0, bottom: 0, child: _buildBottomPanel()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomPanel() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(35),
+          topRight: Radius.circular(35),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Header: "Detalles de batería" + "ver más"
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Detalles de batería',
+                  style: TextStyle(
+                    color: AppTheme.darkColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Inter',
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Ver más',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppTheme.primaryColor,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'Inter',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            // Battery Level + Stats Row (Centered)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Battery Level Indicator (from telemetry feature)
+                const BatteryLevelIndicator(
+                  batteryLevel: 0.82, // 82%
+                ),
+                const SizedBox(width: 50),
+
+                // Savings Stats Card (from profile feature)
+                const SavingsStatsCard(distanceKm: 72, savingsAmount: 23.50),
+              ],
+            ),
+
+            const SizedBox(height: 25),
+
+            // Promotional Banner
+            StationPromoBanner(
+              title: '¡Nueva estación habilitada!',
+              description:
+                  'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}

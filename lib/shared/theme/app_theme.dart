@@ -19,7 +19,7 @@ class AppTheme {
         secondary: secondaryColor,
         seedColor: darkColor,
       ),
-      fontFamily: 'FontFamilyZuap',
+      fontFamily: 'SourceSans3',
       appBarTheme: const AppBarTheme(
         backgroundColor: bgColor,
         foregroundColor: Colors.white,
