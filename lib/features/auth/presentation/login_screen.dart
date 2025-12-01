@@ -25,12 +25,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
-        child: Center(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                SizedBox(height: 10),
                 Text(
                   'Iniciar Sesión',
                   style: TextStyle(
@@ -39,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.w900,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 60),
                 Container(
                   padding: EdgeInsets.all(0),
                   height: 340,
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 40),
                 Column(
                   children: [
                     CustTextField(
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
                 Column(
                   children: [
                     SizedBox(
