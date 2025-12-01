@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _useNameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _useNameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,57 +56,16 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Column(
                   children: [
-                    TextField(
-                      cursorColor: AppTheme.primaryColor,
-                      enabled: true,
-                      decoration: InputDecoration(
-                        focusColor: AppTheme.primaryColor,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppTheme.primaryColor,
-                            width: 2.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        labelText: 'Usuario',
-                        labelStyle: TextStyle(
-                          color: AppTheme.darkGrayColor,
-                          fontWeight: FontWeight.w100,
-                          letterSpacing: 0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                    CustTextField(
+                      labelText: 'Usuario',
+                      controller: _useNameController,
+                      keyboardType: TextInputType.name,
                     ),
                     SizedBox(height: 30),
-                    TextField(
-                      cursorColor: AppTheme.primaryColor,
-                      enabled: true,
-                      decoration: InputDecoration(
-                        focusColor: AppTheme.primaryColor,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppTheme.primaryColor,
-                            width: 2.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        labelText: 'Contraseña',
-                        labelStyle: TextStyle(
-                          color: AppTheme.darkGrayColor,
-                          letterSpacing: 0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                    CustTextField(
+                      labelText: 'Contraseña',
+                      controller: _passwordController,
+                      obscureText: true,
                     ),
                     SizedBox(height: 30),
                     Align(

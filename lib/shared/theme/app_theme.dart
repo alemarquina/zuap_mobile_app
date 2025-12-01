@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   AppTheme._();
@@ -20,7 +19,7 @@ class AppTheme {
         secondary: secondaryColor,
         seedColor: darkColor,
       ),
-      textTheme: GoogleFonts.sourceSans3TextTheme(),
+      fontFamily: 'FontFamilyZuap',
       appBarTheme: const AppBarTheme(
         backgroundColor: bgColor,
         foregroundColor: Colors.white,

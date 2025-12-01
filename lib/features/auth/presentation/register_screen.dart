@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart' hide DropdownButton;
+import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/features/auth/domain/entities/register_form_options.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
-import 'package:zuap_mobile_app/features/auth/presentation/widgets/dropdown_button.dart';
+import 'package:zuap_mobile_app/shared/widgets/custom_dropdown.dart';
+import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -10,11 +12,24 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _numDocController = TextEditingController();
+  final _plateController = TextEditingController();
+
   String? _selectedDocument;
   String? _selectedModelScooter;
 
-  final List<String> _docTypes = ['DNI', 'Carnét de extranjería'];
-  final List<String> _scooterTypes = ['Flex 3.5X', 'Raptor 1.2'];
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _nameController.dispose();
+    _surnameController.dispose();
+    _numDocController.dispose();
+    _plateController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +43,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          size: 35,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        size: 35,
+                        color: Colors.black,
                       ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      padding: EdgeInsets.all(0),
                     ),
                     // Título centrado
                     Center(
@@ -63,90 +76,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: EdgeInsetsGeometry.only(),
                   child: Column(
                     children: [
-                      TextField(
-                        cursorColor: AppTheme.primaryColor,
-                        enabled: true,
-                        decoration: InputDecoration(
-                          focusColor: AppTheme.primaryColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          labelText: 'Correo',
-                          labelStyle: TextStyle(
-                            color: AppTheme.darkGrayColor,
-                            fontWeight: FontWeight.w100,
-                            letterSpacing: 0,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                      CustTextField(
+                        labelText: 'Correo electrónico',
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       SizedBox(height: 30),
-                      TextField(
-                        cursorColor: AppTheme.primaryColor,
-                        enabled: true,
-                        decoration: InputDecoration(
-                          focusColor: AppTheme.primaryColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          labelText: 'Nombres',
-                          labelStyle: TextStyle(
-                            color: AppTheme.darkGrayColor,
-                            fontWeight: FontWeight.w100,
-                            letterSpacing: 0,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                      CustTextField(
+                        labelText: 'Nombres',
+                        controller: _nameController,
+                        keyboardType: TextInputType.name,
                       ),
                       SizedBox(height: 30),
-                      TextField(
-                        cursorColor: AppTheme.primaryColor,
-                        enabled: true,
-                        decoration: InputDecoration(
-                          focusColor: AppTheme.primaryColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          labelText: 'Apellidos',
-                          labelStyle: TextStyle(
-                            color: AppTheme.darkGrayColor,
-                            fontWeight: FontWeight.w100,
-                            letterSpacing: 0,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                      CustTextField(
+                        labelText: 'Apellidos',
+                        controller: _surnameController,
+                        keyboardType: TextInputType.name,
                       ),
                       SizedBox(height: 30),
-                      DropdownButton(
+                      CustomDropdown(
                         labelText: 'Tipo de documento',
-                        options: _docTypes,
+                        options: RegisterFormOptions.documentTypes,
                         value: _selectedDocument,
                         onChanged: (newValue) {
                           setState(() {
@@ -155,31 +105,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       SizedBox(height: 30),
-                      TextField(
-                        cursorColor: AppTheme.primaryColor,
-                        enabled: true,
-                        decoration: InputDecoration(
-                          focusColor: AppTheme.primaryColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          labelText: 'Número de Documento',
-                          labelStyle: TextStyle(
-                            color: AppTheme.darkGrayColor,
-                            fontWeight: FontWeight.w100,
-                            letterSpacing: 0,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
+                      CustTextField(
+                        labelText: 'Número de documento',
+                        controller: _numDocController,
+                        keyboardType: TextInputType.number,
                       ),
                     ],
                   ),
@@ -201,9 +130,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(height: 40),
-                    DropdownButton(
+                    CustomDropdown(
                       labelText: 'Modelo',
-                      options: _scooterTypes,
+                      options: RegisterFormOptions.scooterModels,
                       value: _selectedModelScooter,
                       onChanged: (newValue) {
                         setState(() {
@@ -226,30 +155,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SizedBox(height: 30),
-                    TextField(
-                      cursorColor: AppTheme.primaryColor,
-                      enabled: true,
-                      decoration: InputDecoration(
-                        focusColor: AppTheme.primaryColor,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: AppTheme.primaryColor,
-                            width: 2.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        labelText: 'Número de placa',
-                        labelStyle: TextStyle(
-                          color: AppTheme.darkGrayColor,
-                          letterSpacing: 0,
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                    CustTextField(
+                      labelText: 'Número de placa',
+                      controller: _plateController,
+                      keyboardType: TextInputType.number,
                     ),
                   ],
                 ),

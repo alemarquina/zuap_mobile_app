@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
-class DropdownButton extends StatefulWidget {
+class CustomDropdown extends StatefulWidget {
   final String labelText;
   final List<String> options;
   final String? value;
   final ValueChanged<String?> onChanged;
 
-  const DropdownButton({
+  const CustomDropdown({
     super.key,
     required this.labelText,
     required this.options,
@@ -16,10 +16,10 @@ class DropdownButton extends StatefulWidget {
   });
 
   @override
-  State<DropdownButton> createState() => _DropdownButtonState();
+  State<CustomDropdown> createState() => _CustomDropdownState();
 }
 
-class _DropdownButtonState extends State<DropdownButton> {
+class _CustomDropdownState extends State<CustomDropdown> {
   bool _isMenuOpen = false;
 
   @override

@@ -15,7 +15,7 @@ class MainWidget extends StatelessWidget {
       title: 'Zuap Mobile App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.splash,
       routes: AppRoutes.routes,
     );
   }
