@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/menu_button.dart';
+
+class HeaderTitle extends StatefulWidget {
+  final String titleText;
+
+  const HeaderTitle({super.key, required this.titleText});
+
+  @override
+  State<HeaderTitle> createState() => _HeaderTitleState();
+}
+
+class _HeaderTitleState extends State<HeaderTitle> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.arrow_back, size: 35, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          padding: EdgeInsets.all(0),
+        ),
+        // Título centrado
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              widget.titleText,
+              style: TextStyle(
+                color: AppTheme.darkColor,
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
+        MenuButton(),
+      ],
+    );
+  }
+}

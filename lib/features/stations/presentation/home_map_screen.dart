@@ -1,11 +1,10 @@
-// lib/features/stations/presentation/home_map_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/map_overlay_buttons.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_promo_banner.dart';
 import 'package:zuap_mobile_app/features/telemetry/presentation/widgets/battery_level_indicator.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_stats_card.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 
 class HomeMapPage extends StatefulWidget {
   const HomeMapPage({super.key});
@@ -17,7 +16,7 @@ class HomeMapPage extends StatefulWidget {
 class _HomeMapPageState extends State<HomeMapPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
       body: Stack(
         children: [
           // Static Map Background Image

@@ -5,7 +5,7 @@ import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
 /// Widget that displays a promotional banner for new stations
 /// Shows an image thumbnail and promotional text
-class StationPromoBanner extends StatelessWidget {
+class StationPromoBanner extends StatefulWidget {
   final String title;
   final String description;
 
@@ -15,6 +15,11 @@ class StationPromoBanner extends StatelessWidget {
     required this.description,
   });
 
+  @override
+  State<StationPromoBanner> createState() => _StationPromoBannerState();
+}
+
+class _StationPromoBannerState extends State<StationPromoBanner> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,7 +67,7 @@ class StationPromoBanner extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -70,7 +75,7 @@ class StationPromoBanner extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    description,
+                    widget.description,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w100,

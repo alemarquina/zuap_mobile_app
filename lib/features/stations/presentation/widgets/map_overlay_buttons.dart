@@ -2,17 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/menu_button.dart';
 
 /// Widget that displays the floating action buttons over the map
 /// (Menu button with 3 dots and Search button)
-class MapOverlayButtons extends StatefulWidget {
+class MapOverlayButtons extends StatelessWidget {
   const MapOverlayButtons({super.key});
 
-  @override
-  State<MapOverlayButtons> createState() => _MapOverlayButtonsState();
-}
-
-class _MapOverlayButtonsState extends State<MapOverlayButtons> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,8 +16,14 @@ class _MapOverlayButtonsState extends State<MapOverlayButtons> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Menu Button (3 vertical dots)
-          _buildCircularButton(icon: Icons.more_vert, onPressed: () {}),
+          // Menu Button (abre el drawer)
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: MenuButton(),
+          ),
           const SizedBox(height: 15),
 
           // Search Button
@@ -59,7 +61,7 @@ class _MapOverlayButtonsState extends State<MapOverlayButtons> {
           borderRadius: BorderRadius.circular(25),
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Icon(icon, color: AppTheme.primaryColor, size: 32),
+            child: Icon(icon, color: AppTheme.primaryColor, size: 35),
           ),
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
+import 'package:zuap_mobile_app/shared/widgets/header_title.dart';
+import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 
 class StationScreen extends StatefulWidget {
   const StationScreen({super.key});
@@ -20,7 +22,7 @@ class _StationScreenState extends State<StationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,39 +30,8 @@ class _StationScreenState extends State<StationScreen> {
           child: Column(
             children: [
               // Header with back button and title
-              Stack(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      size: 35,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    padding: EdgeInsets.all(0),
-                  ),
-                  // Título centrado
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Estaciones',
-                        style: TextStyle(
-                          color: AppTheme.darkColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
+              HeaderTitle(titleText: 'Estaciones'),
               const SizedBox(height: 30),
-
-              // Search Field
               CustTextField(
                 labelText: 'Buscar estación',
                 controller: _stationController,
@@ -69,7 +40,6 @@ class _StationScreenState extends State<StationScreen> {
 
               SizedBox(height: 30),
 
-              // "ESTACIONES CERCANAS" Title
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
