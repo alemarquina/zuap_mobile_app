@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
-class HeaderUserProfile extends StatefulWidget {
-  const HeaderUserProfile({super.key});
+class MiniHeaderUser extends StatefulWidget {
+  const MiniHeaderUser({super.key});
 
   @override
-  State<HeaderUserProfile> createState() => _HeaderUserProfileState();
+  State<MiniHeaderUser> createState() => _MiniHeaderUserState();
 }
 
-class _HeaderUserProfileState extends State<HeaderUserProfile> {
+class _MiniHeaderUserState extends State<MiniHeaderUser> {
   @override
   Widget build(BuildContext context) {
     return Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/blue_button.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -102,33 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 30),
                 Column(
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/home_map_screen');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: AppTheme.primaryColor,
-                          minimumSize: Size(double.infinity, 67),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35),
-                            side: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          'Iniciar Sesión',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                    BlueButton(
+                      nameButton: 'Iniciar Sesión',
+                      routeName: '/home_map_screen',
                     ),
                     SizedBox(height: 30),
                     SizedBox(

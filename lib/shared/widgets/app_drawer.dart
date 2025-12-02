@@ -1,7 +1,7 @@
 // lib/shared/widgets/app_drawer.dart
 
 import 'package:flutter/material.dart';
-import 'package:zuap_mobile_app/features/profile/presentation/widgets/header_user.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/widgets/min_header_user.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/exit_button.dart';
 
@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              HeaderUserProfile(),
+              MiniHeaderUser(),
               SizedBox(height: 70),
               Expanded(
                 child: ListView(

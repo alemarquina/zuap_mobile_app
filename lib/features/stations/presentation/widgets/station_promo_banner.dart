@@ -40,8 +40,8 @@ class _StationPromoBannerState extends State<StationPromoBanner> {
               height: double.infinity,
               width: 150,
               color: Colors.grey[300],
-              child: Image.asset(
-                'assets/images/station_placeholder.png',
+              child: Image.network(
+                'https://www.petroperu.com.pe/Storage/modsnw/image/4084-m3Ja5Vt6Vw6Ue0J.jpg',
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(

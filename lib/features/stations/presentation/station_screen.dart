@@ -40,7 +40,7 @@ class _StationScreenState extends State<StationScreen> {
 
               SizedBox(height: 30),
 
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'ESTACIONES CERCANAS',

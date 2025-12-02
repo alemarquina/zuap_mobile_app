@@ -31,7 +31,7 @@ class _HeaderTitleState extends State<HeaderTitle> {
             padding: const EdgeInsets.only(top: 10),
             child: Text(
               widget.titleText,
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppTheme.darkColor,
                 fontSize: 20,
                 fontWeight: FontWeight.w900,
