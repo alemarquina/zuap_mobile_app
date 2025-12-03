@@ -47,7 +47,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Batería',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/battery_details_screen');
                       },
                     ),
                     _buildMenuItem(

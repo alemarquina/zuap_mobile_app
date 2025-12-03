@@ -2,11 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
-/// Widget that displays the battery level as a circular progress indicator
-/// This widget is agnostic of the map and can be reused anywhere
 class BatteryLevelIndicator extends StatelessWidget {
   final double batteryLevel; // Value between 0.0 and 1.0
 
@@ -61,7 +58,6 @@ class _CircularProgressPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = (size.width - strokeWidth) / 2;
 
-    // Draw background circle
     final backgroundPaint = Paint()
       ..color = backgroundColor
       ..strokeWidth = strokeWidth
@@ -70,14 +66,13 @@ class _CircularProgressPainter extends CustomPainter {
 
     canvas.drawCircle(center, radius, backgroundPaint);
 
-    // Draw progress arc
     final progressPaint = Paint()
       ..color = progressColor
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    const startAngle = -math.pi / 2; // Start from top
+    const startAngle = -math.pi / 2.5;
     final sweepAngle = 2 * math.pi * progress;
 
     canvas.drawArc(

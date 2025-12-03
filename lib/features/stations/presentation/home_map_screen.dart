@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/map_overlay_buttons.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_promo_banner.dart';
-import 'package:zuap_mobile_app/features/telemetry/presentation/widgets/battery_level_indicator.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_level.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_stats_card.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
@@ -89,7 +89,9 @@ class _HomeMapPageState extends State<HomeMapPage> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/battery_details_screen');
+                  },
                   child: const Text(
                     'Ver más',
                     style: TextStyle(

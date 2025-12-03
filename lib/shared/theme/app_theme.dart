@@ -19,6 +19,9 @@ class AppTheme {
         secondary: secondaryColor,
         seedColor: darkColor,
       ),
+      textTheme: TextTheme(
+        bodyMedium: TextStyle(fontSize: 16, letterSpacing: 0),
+      ),
       fontFamily: 'SourceSans3',
       appBarTheme: const AppBarTheme(
         backgroundColor: bgColor,

@@ -68,8 +68,8 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
                         text: 'Coloque su correo y espere el ',
                         style: TextStyle(
                           color: AppTheme.darkGrayColor,
-                          fontSize: 22,
-                          fontFamily: 'FontFamilyZuap',
+                          fontSize: 22.5,
+                          fontFamily: 'SourceSans3',
                         ),
                         children: [
                           TextSpan(
