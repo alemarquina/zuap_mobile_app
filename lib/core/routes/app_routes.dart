@@ -4,8 +4,8 @@ import 'package:zuap_mobile_app/features/auth/presentation/login_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/register_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/battery_details_screen.dart';
-import 'package:zuap_mobile_app/features/stations/presentation/home_map_screen.dart';
-import 'package:zuap_mobile_app/features/stations/presentation/station_screen.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';

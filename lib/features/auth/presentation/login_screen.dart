@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
-import 'package:zuap_mobile_app/shared/widgets/blue_button.dart';
+import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
+import 'package:zuap_mobile_app/shared/widgets/button_transparent.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(height: 10),
-                Text(
+                const Text(
                   'Iniciar Sesión',
                   style: TextStyle(
                     color: AppTheme.darkColor,
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Column(
                   children: [
                     CustTextField(
@@ -108,32 +109,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       routeName: '/home_map_screen',
                     ),
                     SizedBox(height: 30),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: AppTheme.bgColor,
-                          minimumSize: Size(double.infinity, 67),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35),
-                            side: BorderSide(
-                              color: AppTheme.primaryColor,
-                              width: 2.5,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          'Crear Cuenta',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
+                    ButtonTransparent(
+                      nameButton: 'Crear cuenta',
+                      routeName: '/register',
                     ),
                   ],
                 ),

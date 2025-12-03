@@ -16,7 +16,7 @@ class _HeaderTitleState extends State<HeaderTitle> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
           icon: const Icon(Icons.arrow_back, size: 35, color: Colors.black),
@@ -33,7 +33,7 @@ class _HeaderTitleState extends State<HeaderTitle> {
               widget.titleText,
               style: const TextStyle(
                 color: AppTheme.darkColor,
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.w900,
               ),
             ),

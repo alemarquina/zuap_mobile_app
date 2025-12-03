@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_card.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
-import 'package:zuap_mobile_app/shared/widgets/header_title.dart';
+import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 
 class StationScreen extends StatefulWidget {
@@ -54,80 +55,45 @@ class _StationScreenState extends State<StationScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
-
+              const SizedBox(height: 30),
               // Station Cards List
-              _buildStationCard(
+              const StationCard(
                 name: 'Estación Tambo',
-                availableBatteries: 7,
+                availableBatteries: 4,
                 distance: '412 m',
+                address: 'Av Libertadores 456',
+                status: 'Abierto',
+                schedule: 'Lunes a Domingo de 7:00 a 9:00',
+                imagePath:
+                    'https://www.infobae.com/new-resizer/o277JOptGR4y5QwKI08RN0f02AI=/arc-anglerfish-arc2-prod-infobae/public/GT4DF2PS7NA6VJ5JZBRGIJ3G44.jpg',
               ),
 
               const SizedBox(height: 15),
 
-              _buildStationCard(
+              const StationCard(
                 name: 'Estación Primax',
                 availableBatteries: 2,
                 distance: '1.7 Km',
+                address: 'Av. Javier Prado 1234',
+                status: 'Abierto',
+                schedule: '24 Horas',
+                imagePath:
+                    'https://agesp.org.pe/wp-content/uploads/2023/10/primax.jpg',
               ),
-
               const SizedBox(height: 15),
-
-              _buildStationCard(
-                name: 'Estación Norkys',
+              const StationCard(
+                name: 'Estación Petroperú',
                 availableBatteries: 10,
                 distance: '2.4 Km',
+                address: 'Av. La Marina 500',
+                status: 'Cerrado',
+                schedule: 'Lunes a Domingo de 12:00 a 23:00',
+                imagePath:
+                    'https://www.petroperu.com.pe/Docs/spa/images/productos/cliente_grifos.jpg',
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildStationCard({
-    required String name,
-    required int availableBatteries,
-    required String distance,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-            style: TextStyle(
-              color: AppTheme.darkColor,
-              fontSize: 16,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Baterías disponibles: $availableBatteries',
-            style: TextStyle(
-              color: Colors.grey[700],
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Distancia: $distance',
-            style: TextStyle(
-              color: Colors.grey[700],
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_level.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
-import 'package:zuap_mobile_app/shared/widgets/blue_button.dart';
-import 'package:zuap_mobile_app/shared/widgets/header_title.dart';
+import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
+import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
 
 class BatteryDetailsScreen extends StatefulWidget {
   const BatteryDetailsScreen({super.key});
