@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Iniciar Sesión',
                   style: TextStyle(
                     color: AppTheme.darkColor,
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: FontWeight.w900,
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/features/auth/domain/entities/register_form_options.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/button_transparent.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_dropdown.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 
@@ -164,30 +165,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 45),
                 // Botón Registrate
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      backgroundColor: AppTheme.bgColor,
-                      minimumSize: Size(double.infinity, 67),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35),
-                        side: BorderSide(
-                          color: AppTheme.primaryColor,
-                          width: 2.5,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      'Registrarse',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
+                ButtonTransparent(
+                  nameButton: 'Registrase',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
             ),
