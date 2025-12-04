@@ -21,7 +21,7 @@ class AppRoutes {
     login: (context) => const LoginScreen(),
     register: (context) => const RegisterScreen(),
     resetPasswordScreen: (context) => const ForgottenPassword(),
-    homeMapScreen: (context) => const HomeMapPage(),
+    homeMapScreen: (context) => const HomeMapScreen(),
     stationScreen: (context) => const StationScreen(),
     batteryDetailsScreen: (context) => const BatteryDetailsScreen(),
   };

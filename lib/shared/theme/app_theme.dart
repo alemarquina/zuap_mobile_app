@@ -11,7 +11,7 @@ class AppTheme {
   static const Color darkGrayColor = Color(0xFF616161);
   static const Color lightGrayColor = Color(0xFFBDBDBD);
 
-  static ThemeData get lightTheme {
+  static ThemeData get themeZuap {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(

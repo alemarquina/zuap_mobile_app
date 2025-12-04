@@ -6,14 +6,14 @@ import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_st
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 
-class HomeMapPage extends StatefulWidget {
-  const HomeMapPage({super.key});
+class HomeMapScreen extends StatefulWidget {
+  const HomeMapScreen({super.key});
 
   @override
-  State<HomeMapPage> createState() => _HomeMapPageState();
+  State<HomeMapScreen> createState() => _HomeMapScreenState();
 }
 
-class _HomeMapPageState extends State<HomeMapPage> {
+class _HomeMapScreenState extends State<HomeMapScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
