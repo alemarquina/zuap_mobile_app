@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/map_overlay_buttons.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_promo_banner.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_level.dart';
@@ -14,34 +15,32 @@ class HomeMapScreen extends StatefulWidget {
 }
 
 class _HomeMapScreenState extends State<HomeMapScreen> {
+  GoogleMapController? _mapController;
+
+  // Initial camera position (Lima, Peru - you can adjust this)
+  static const CameraPosition _initialPosition = CameraPosition(
+    target: LatLng(-12.0464, -77.0428), // Lima, Peru
+    zoom: 14.0,
+  );
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
       body: Stack(
         children: [
-          // Static Map Background Image
+          // Google Map Background
           Positioned.fill(
-            child: Image.asset(
-              'assets/images/map_background.png',
-              fit: BoxFit.cover,
+            child: GoogleMap(
+              initialCameraPosition: _initialPosition,
+              onMapCreated: (GoogleMapController controller) {
+                _mapController = controller;
+              },
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false, // We have custom buttons
+              zoomControlsEnabled: false, // We have custom buttons
+              mapToolbarEnabled: false,
+              compassEnabled: false,
             ),
-          ),
-
-          // Map Markers/Pins Overlay
-          Positioned(
-            top: 200,
-            left: MediaQuery.of(context).size.width * 0.4,
-            child: Icon(
-              Icons.location_pin,
-              color: AppTheme.primaryColor,
-              size: 40,
-            ),
-          ),
-
-          Positioned(
-            top: 350,
-            right: 60,
-            child: Icon(Icons.location_pin, color: Colors.green, size: 32),
           ),
 
           // Overlay Buttons (Menu & Search)
