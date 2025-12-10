@@ -190,98 +190,9 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
               // Stats_monthly
               Column(
                 children: [
-                  Container(
-                    height: 90,
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'KM',
-                          style: TextStyle(
-                            color: AppTheme.darkColor,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 40,
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Has recorrido',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: AppTheme.darkGrayColor,
-                              ),
-                            ),
-                            SizedBox(height: 3),
-                            Text(
-                              '450 Km',
-                              style: TextStyle(
-                                color: AppTheme.darkColor,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  RowKmWidget(),
                   SizedBox(height: 20),
-                  Container(
-                    height: 90,
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Ahorro estimado',
-                              style: TextStyle(fontWeight: FontWeight.w900),
-                            ),
-                            Text('vs gasolina'),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Has ahorrado',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: AppTheme.darkGrayColor,
-                              ),
-                            ),
-                            SizedBox(height: 3),
-                            Text(
-                              'S/ 53.30',
-                              style: TextStyle(
-                                color: AppTheme.darkColor,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  RowSavingsEstimated(),
                 ],
               ),
               SizedBox(height: 40),
@@ -294,6 +205,97 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Container RowSavingsEstimated() {
+    return Container(
+      height: 90,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Ahorro estimado',
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
+              Text('vs gasolina'),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'Has ahorrado',
+                style: TextStyle(fontSize: 12, color: AppTheme.darkGrayColor),
+              ),
+              SizedBox(height: 3),
+              Text(
+                'S/ 53.30',
+                style: TextStyle(
+                  color: AppTheme.darkColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container RowKmWidget() {
+    return Container(
+      height: 90,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'KM',
+            style: TextStyle(
+              color: AppTheme.darkColor,
+              fontWeight: FontWeight.w900,
+              fontSize: 40,
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'Has recorrido',
+                style: TextStyle(fontSize: 12, color: AppTheme.darkGrayColor),
+              ),
+              SizedBox(height: 3),
+              Text(
+                '450 Km',
+                style: TextStyle(
+                  color: AppTheme.darkColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
