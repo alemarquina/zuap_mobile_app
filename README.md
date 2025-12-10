@@ -40,7 +40,7 @@ zuap_mobile_app/
 │   │   ├── errors/
 │   │   ├── network/
 │   │   ├── routes/
-│   │   ├── storage/
+│   │   ├── di/
 │   │   └── utils/
 │   ├── features/
 │   │   ├── auth/
