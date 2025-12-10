@@ -4,9 +4,9 @@
 
 ## Tecnologías
 
-*   ![Flutter](https://img.shields.io/badge/Flutter-25A6D5?style=for-the-badge&logo=Flutter&logoColor=white)
-*   ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
-*   ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Flutter](https://img.shields.io/badge/Flutter-25A6D5?style=for-the-badge&logo=Flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 
 ## Integraciones
 
@@ -29,5 +29,57 @@ El ecosistema de Zuap utiliza una arquitectura distribuida que integra la aplica
 ## Arquitectura del Proyecto
 
 La arquitectura del proyecto sigue los principios de Clean Architecture, organizada modularmente por "features". Cada carpeta en lib/features/ representa un dominio de negocio específico de Zuap.
+
+```
+zuap_mobile_app/
+├── assets/
+├── build/
+├── lib/
+│   ├── core/
+│   │   ├── config/
+│   │   ├── errors/
+│   │   ├── network/
+│   │   ├── routes/
+│   │   ├── storage/
+│   │   └── utils/
+│   ├── features/
+│   │   ├── auth/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── battery/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── profile/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── stations/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── swap/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── vehicles/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   └── wallet/
+│   │       ├── data/
+│   │       ├── domain/
+│   │       └── presentation/
+│   └── shared/
+│       ├── theme/
+│       └── widgets/
+├── test/
+├── .metadata
+├── analysis_options.yaml
+├── pubspec.lock
+├── pubspec.yaml
+└── zuap_mobiel_app.iml
+```
              
 **Software Company**: Digilab
