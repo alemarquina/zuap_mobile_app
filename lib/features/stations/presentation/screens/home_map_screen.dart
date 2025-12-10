@@ -17,9 +17,9 @@ class HomeMapScreen extends StatefulWidget {
 class _HomeMapScreenState extends State<HomeMapScreen> {
   GoogleMapController? _mapController;
 
-  // Initial camera position (Lima, Peru - you can adjust this)
+  // Mapa apuntando a Perú inicialmente
   static const CameraPosition _initialPosition = CameraPosition(
-    target: LatLng(-12.0464, -77.0428), // Lima, Peru
+    target: LatLng(-12.0464, -77.0428), 
     zoom: 14.0,
   );
 
@@ -28,7 +28,6 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
     return AppScaffold(
       body: Stack(
         children: [
-          // Google Map Background
           Positioned.fill(
             child: GoogleMap(
               initialCameraPosition: _initialPosition,
@@ -36,17 +35,15 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                 _mapController = controller;
               },
               myLocationEnabled: true,
-              myLocationButtonEnabled: false, // We have custom buttons
-              zoomControlsEnabled: false, // We have custom buttons
+              myLocationButtonEnabled: false, 
+              zoomControlsEnabled: false, 
               mapToolbarEnabled: false,
               compassEnabled: false,
             ),
           ),
 
-          // Overlay Buttons (Menu & Search)
           const Positioned(top: 50, right: 16, child: MapOverlayButtons()),
 
-          // Bottom Panel with Battery Details
           Positioned(left: 0, right: 0, bottom: 0, child: _buildBottomPanel()),
         ],
       ),
@@ -74,7 +71,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Header: "Detalles de batería" + "ver más"
+            // Battery Details
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -104,24 +101,21 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
               ],
             ),
             SizedBox(height: 20),
-            // Battery Level + Stats Row (Centered)
+            // Battery Level + Stats Row
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Battery Level Indicator (from telemetry feature)
+                // Battery Level Indicator
                 const BatteryLevelIndicator(
                   batteryLevel: 0.82, // 82%
                 ),
                 const SizedBox(width: 50),
-
-                // Savings Stats Card (from profile feature)
+                // Savings Stats Card
                 const SavingsStatsCard(distanceKm: 72, savingsAmount: 23.50),
               ],
             ),
-
             const SizedBox(height: 25),
-
             // Promotional Banner
             StationPromoBanner(
               title: '¡Nueva estación habilitada!',
