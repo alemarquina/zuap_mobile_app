@@ -6,6 +6,7 @@ import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_le
 import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_stats_card.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
+import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
 
 class HomeMapScreen extends StatefulWidget {
   const HomeMapScreen({super.key});
@@ -19,7 +20,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
 
   // Mapa apuntando a Perú inicialmente
   static const CameraPosition _initialPosition = CameraPosition(
-    target: LatLng(-12.0464, -77.0428), 
+    target: LatLng(-12.0464, -77.0428),
     zoom: 14.0,
   );
 
@@ -35,8 +36,8 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                 _mapController = controller;
               },
               myLocationEnabled: true,
-              myLocationButtonEnabled: false, 
-              zoomControlsEnabled: false, 
+              myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
               mapToolbarEnabled: false,
               compassEnabled: false,
             ),
@@ -115,13 +116,17 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                 const SavingsStatsCard(distanceKm: 72, savingsAmount: 23.50),
               ],
             ),
-            const SizedBox(height: 25),
+            SizedBox(height: 15),
+            Divider(color: Colors.grey, thickness: 1.5),
+            const SizedBox(height: 15),
             // Promotional Banner
             StationPromoBanner(
               title: '¡Nueva estación habilitada!',
               description:
                   'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
             ),
+            SizedBox(height: 25),
+            BlueButton(nameButton: 'Pagar'),
             SizedBox(height: 20),
           ],
         ),
