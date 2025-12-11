@@ -1,219 +1,256 @@
 import 'package:flutter/material.dart';
-import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_level.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_cubit.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_state.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_circle_indicator.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
+import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
 import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
 
-class BatteryDetailsScreen extends StatefulWidget {
+class BatteryDetailsScreen extends StatelessWidget {
   const BatteryDetailsScreen({super.key});
 
   @override
-  State<BatteryDetailsScreen> createState() => _BatteryDetailsScreenState();
-}
-
-class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AppScaffold(
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 25),
-          child: Column(
-            children: [
-              HeaderTitle(titleText: 'Batería'),
-              SizedBox(height: 40),
-              Align(
-                alignment: AlignmentGeometry.centerLeft,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Código: ',
-                    style: TextStyle(
-                      color: AppTheme.darkGrayColor,
-                      fontSize: 22.5,
-                      fontFamily: 'SourceSans3',
-                    ),
-                    children: [
-                      TextSpan(
-                        text: '#STN-0421',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 40),
-              Container(
-                height: 180,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+        child: BlocBuilder<BatteryCubit, BatteryState>(
+          builder: (context, state) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+              child: Column(
+                children: [
+                  const HeaderTitle(titleText: 'Batería'),
+                  const SizedBox(height: 40),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Row(
                       children: [
-                        Text('Nivel de batería'),
-                        SizedBox(height: 5),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Ciclos de Uso: ',
-                            style: TextStyle(
-                              color: AppTheme.darkGrayColor,
-                              fontSize: 20,
-                              fontFamily: 'SourceSans3',
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '150',
-                                style: TextStyle(fontWeight: FontWeight.w600),
-                              ),
-                            ],
+                        const Text(
+                          'Código: ',
+                          style: TextStyle(color: AppTheme.darkGrayColor),
+                        ),
+                        _DataOrSkeleton(
+                          isLoading: state is! BatteryLoaded,
+                          width: 120,
+                          height: 25,
+                          child: Text(
+                            state is BatteryLoaded
+                                ? state.battery.serialNumber
+                                : '',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
                     ),
-                    BatteryLevelIndicator(batteryLevel: 0.82),
-                  ],
-                ),
-              ),
-              SizedBox(height: 40),
-              Container(
-                height: 180,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
+                  ),
+                  const SizedBox(height: 40),
+
+                  // Tarjeta Nivel de Bataría
+                  Container(
+                    height: 180,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Recorrido',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w900,
+                            const Text('Nivel de batería'),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Text(
+                                  'Ciclos de Uso: ',
+                                  style: TextStyle(
+                                    color: AppTheme.darkGrayColor,
+                                    fontSize: 16,
+                                    fontFamily: 'SourceSans3',
+                                  ),
+                                ),
+                                _DataOrSkeleton(
+                                  isLoading: state is! BatteryLoaded,
+                                  width: 40,
+                                  child: Text(
+                                    state is BatteryLoaded
+                                        ? '${state.battery.cycles}'
+                                        : '',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        // Indicador Circular
+                        state is! BatteryLoaded
+                            ? const SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: CircularProgressIndicator(
+                                  color: AppTheme.primaryColor,
+                                ),
+                              )
+                            : BatteryCircleIndicator(
+                                batteryLevel: state.battery.chargeLevel,
+                                size: 120,
                               ),
-                            ),
-                            SizedBox(height: 15),
-                            Text(
-                              '72 Km',
-                              style: TextStyle(color: AppTheme.darkGrayColor),
-                            ),
-                          ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+
+                  // Recorrido, tiempo y termómetro
+                  Container(
+                    height: 180,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildInfoBox(
+                          'Recorrido',
+                          state is BatteryLoaded
+                              ? '${state.battery.currentRangeKm.toStringAsFixed(0)} Km'
+                              : null,
                         ),
+                        const SizedBox(width: 20),
+                        _buildInfoBox(
+                          'Tiempo útil',
+                          state is BatteryLoaded
+                              ? state.battery.timeLeft
+                              : null,
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Container(
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomPaint(
+                                  size: const Size(40, 80),
+                                  painter: _ThermometerPainter(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+
+                  // Data inferior
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Detalles',
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Ultimo mes',
+                          style: TextStyle(color: AppTheme.darkGrayColor),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Stats Mensuales
+                  Column(
+                    children: [
+                      _buildKmWidget(
+                        state is! BatteryLoaded,
+                        state is BatteryLoaded ? state.battery.totalKm : null,
                       ),
-                    ),
-                    SizedBox(width: 20),
-                    Expanded(
-                      child: Container(
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Tiempo útil',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Text(
-                              '8:32 h',
-                              style: TextStyle(color: AppTheme.darkGrayColor),
-                            ),
-                          ],
-                        ),
+                      const SizedBox(height: 20),
+                      _buildSavingsWidget(
+                        state is! BatteryLoaded,
+                        state is BatteryLoaded
+                            ? state.battery.estimatedSavings
+                            : null,
                       ),
-                    ),
-                    SizedBox(width: 20),
-                    Expanded(
-                      child: Container(
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Thermometer Icon
-                            CustomPaint(
-                              size: Size(40, 80),
-                              painter: _ThermometerPainter(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 40),
-              Align(
-                alignment: AlignmentGeometry.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Detalles',
-                      style: TextStyle(fontWeight: FontWeight.w900),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      'Ultimo mes',
-                      style: TextStyle(color: AppTheme.darkGrayColor),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30),
-              // Stats_monthly
-              Column(
-                children: [
-                  RowKmWidget(),
-                  SizedBox(height: 20),
-                  RowSavingsEstimated(),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+
+                  BlueButton(
+                    nameButton: 'Historial de Cambios',
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ],
               ),
-              SizedBox(height: 40),
-              BlueButton(
-                nameButton: 'Historial de Cambios',
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
   }
 
-  Container RowSavingsEstimated() {
+  // Widgets auxiliares
+
+  Widget _buildInfoBox(String title, String? value) {
+    return Expanded(
+      child: Container(
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            const SizedBox(height: 15),
+            _DataOrSkeleton(
+              isLoading: value == null,
+              width: 60,
+              child: Text(
+                value ?? '',
+                style: const TextStyle(color: AppTheme.darkGrayColor),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSavingsWidget(bool isLoading, double? savings) {
     return Container(
       height: 90,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -221,7 +258,7 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -236,17 +273,22 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
+              const Text(
                 'Has ahorrado',
                 style: TextStyle(fontSize: 12, color: AppTheme.darkGrayColor),
               ),
-              SizedBox(height: 3),
-              Text(
-                'S/ 53.30',
-                style: TextStyle(
-                  color: AppTheme.darkColor,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
+              const SizedBox(height: 3),
+              _DataOrSkeleton(
+                isLoading: isLoading,
+                width: 100,
+                height: 30,
+                child: Text(
+                  savings != null ? 'S/ ${savings.toStringAsFixed(2)}' : '',
+                  style: const TextStyle(
+                    color: AppTheme.darkColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
             ],
@@ -256,11 +298,11 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
     );
   }
 
-  Container RowKmWidget() {
+  Widget _buildKmWidget(bool isLoading, double? totalKm) {
     return Container(
       height: 90,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
@@ -268,7 +310,7 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'KM',
             style: TextStyle(
               color: AppTheme.darkColor,
@@ -280,17 +322,22 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
+              const Text(
                 'Has recorrido',
                 style: TextStyle(fontSize: 12, color: AppTheme.darkGrayColor),
               ),
-              SizedBox(height: 3),
-              Text(
-                '450 Km',
-                style: TextStyle(
-                  color: AppTheme.darkColor,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
+              const SizedBox(height: 3),
+              _DataOrSkeleton(
+                isLoading: isLoading,
+                width: 100,
+                height: 30,
+                child: Text(
+                  totalKm != null ? '${totalKm.toInt()} Km' : '',
+                  style: const TextStyle(
+                    color: AppTheme.darkColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
             ],
@@ -301,12 +348,40 @@ class _BatteryDetailsScreenState extends State<BatteryDetailsScreen> {
   }
 }
 
-/// Custom painter para dibujar el ícono del termómetro
+// Esqueleto de carga
+class _DataOrSkeleton extends StatelessWidget {
+  final bool isLoading;
+  final Widget child;
+  final double width;
+  final double height;
+
+  const _DataOrSkeleton({
+    required this.isLoading,
+    required this.child,
+    this.width = 50,
+    this.height = 20,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (!isLoading) return child;
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(5),
+      ),
+    );
+  }
+}
+
+// --- THERMOMETER PAINTER ---
 class _ThermometerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final color = Colors.green; // Verde
-    final strokeWidth = 3.0;
+    const color = Colors.green;
+    const strokeWidth = 3.0;
 
     final paintStroke = Paint()
       ..color = color
@@ -322,12 +397,10 @@ class _ThermometerPainter extends CustomPainter {
     final height = size.height;
     final centerX = width / 2;
 
-    // Dimensiones
     final bulbRadius = width * 0.35;
     final stemWidth = width * 0.35;
-    final stemHeight = height - bulbRadius; // Altura hasta el centro del bulbo
+    final stemHeight = height - bulbRadius;
 
-    // 1. Dibujar el contorno (Stem + Bulb unidos)
     final stemRect = Rect.fromLTWH(
       centerX - stemWidth / 2,
       0,
@@ -340,33 +413,26 @@ class _ThermometerPainter extends CustomPainter {
       radius: bulbRadius,
     );
 
-    // Crear path del tallo
     final stemPath = Path()
       ..addRRect(
         RRect.fromRectAndRadius(stemRect, Radius.circular(stemWidth / 2)),
       );
 
-    // Crear path del bulbo
     final bulbPath = Path()..addOval(bulbRect);
-
-    // Unir ambos paths para crear el contorno continuo
     final outlinePath = Path.combine(PathOperation.union, stemPath, bulbPath);
 
     canvas.drawPath(outlinePath, paintStroke);
 
-    // 2. Dibujar el líquido interno
-    final padding = 6.0; // Espacio entre contorno y líquido
+    const padding = 6.0;
     final innerBulbRadius = bulbRadius - padding;
     final innerStemWidth = stemWidth - (padding * 2);
-
-    // Altura del líquido (ejemplo: 60% lleno)
     final liquidTop = height * 0.4;
 
     final innerStemRect = Rect.fromLTWH(
       centerX - innerStemWidth / 2,
       liquidTop,
       innerStemWidth,
-      (height - bulbRadius) - liquidTop, // Hasta el centro del bulbo
+      (height - bulbRadius) - liquidTop,
     );
 
     final innerBulbRect = Rect.fromCircle(

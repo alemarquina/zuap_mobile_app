@@ -1,33 +1,39 @@
-// lib/features/telemetry/presentation/widgets/battery_level_indicator.dart
-
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
-class BatteryLevelIndicator extends StatelessWidget {
-  final double batteryLevel; // Value between 0.0 and 1.0
+/// Widget reutilizable sin estado que muestra un indicador circular del nivel de batería.
+class BatteryCircleIndicator extends StatelessWidget {
 
-  const BatteryLevelIndicator({super.key, required this.batteryLevel});
+  final double batteryLevel;
+  
+  final double size;
+
+  const BatteryCircleIndicator({
+    super.key,
+    required this.batteryLevel,
+    this.size = 100,
+  });
 
   @override
   Widget build(BuildContext context) {
     final percentage = (batteryLevel * 100).toInt();
 
     return SizedBox(
-      width: 140,
-      height: 100,
-      child: CustomPaint(
+      width: size,
+      height: size,
+      child: CustomPaint(        
         painter: _CircularProgressPainter(
           progress: batteryLevel,
           progressColor: AppTheme.primaryColor,
           backgroundColor: const Color(0xFFE5E7EB),
-          strokeWidth: 15,
+          strokeWidth: size * 0.12, 
         ),
         child: Center(
           child: Text(
             '$percentage%',
-            style: const TextStyle(
-              fontSize: 33,
+            style: TextStyle(
+              fontSize: 30, 
               fontWeight: FontWeight.w900,
               color: Colors.black,
               fontFamily: 'Inter',
@@ -39,7 +45,7 @@ class BatteryLevelIndicator extends StatelessWidget {
   }
 }
 
-/// Custom painter for the circular progress indicator
+/// Indicador de progreso circular
 class _CircularProgressPainter extends CustomPainter {
   final double progress;
   final Color progressColor;
@@ -58,6 +64,7 @@ class _CircularProgressPainter extends CustomPainter {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = (size.width - strokeWidth) / 2;
 
+    // Dibujar círculo de fondo
     final backgroundPaint = Paint()
       ..color = backgroundColor
       ..strokeWidth = strokeWidth
@@ -66,6 +73,7 @@ class _CircularProgressPainter extends CustomPainter {
 
     canvas.drawCircle(center, radius, backgroundPaint);
 
+    // Dibujar arco de progreso
     final progressPaint = Paint()
       ..color = progressColor
       ..strokeWidth = strokeWidth
