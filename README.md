@@ -72,9 +72,10 @@ zuap_mobile_app/
 │   │       ├── data/
 │   │       ├── domain/
 │   │       └── presentation/
-│   └── shared/
-│       ├── theme/
-│       └── widgets/
+│   ├── shared/
+│   │   ├── theme/
+│   │   └── widgets/
+│   └──main.dart
 ├── test/
 ├── .metadata
 ├── analysis_options.yaml
