@@ -40,7 +40,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Home',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/home_map_screen');
                       },
                     ),
                     _buildMenuItem(
