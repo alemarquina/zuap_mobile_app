@@ -83,3 +83,4 @@ zuap_mobile_app/
 ```
              
 **Software Company**: Digilab
+**Software Developer**: Alessandro Marquina
