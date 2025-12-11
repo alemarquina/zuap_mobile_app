@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_cubit.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_state.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_circle_indicator.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/map_overlay_buttons.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_promo_banner.dart';
-import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_level.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_stats_card.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
@@ -16,8 +19,6 @@ class HomeMapScreen extends StatefulWidget {
 }
 
 class _HomeMapScreenState extends State<HomeMapScreen> {
-  GoogleMapController? _mapController;
-
   // Mapa apuntando a Perú inicialmente
   static const CameraPosition _initialPosition = CameraPosition(
     target: LatLng(-12.0464, -77.0428),
@@ -32,9 +33,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
           Positioned.fill(
             child: GoogleMap(
               initialCameraPosition: _initialPosition,
-              onMapCreated: (GoogleMapController controller) {
-                _mapController = controller;
-              },
+              onMapCreated: (GoogleMapController controller) {},
               myLocationEnabled: true,
               myLocationButtonEnabled: false,
               zoomControlsEnabled: false,
@@ -69,68 +68,119 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Battery Details
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: BlocBuilder<BatteryCubit, BatteryState>(
+          builder: (context, state) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Detalles de batería',
-                  style: TextStyle(
-                    color: AppTheme.darkColor,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'Inter',
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/battery_details_screen');
-                  },
-                  child: const Text(
-                    'Ver más',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppTheme.primaryColor,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Inter',
+                // Hedaer Detalles de Batería
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Detalles de batería',
+                      style: TextStyle(
+                        color: AppTheme.darkColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Inter',
+                      ),
                     ),
-                  ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/battery_details_screen');
+                      },
+                      child: const Text(
+                        'Ver más',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppTheme.primaryColor,
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Inter',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(height: 20),
-            // Battery Level + Stats Row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Battery Level Indicator
-                const BatteryLevelIndicator(
-                  batteryLevel: 0.82, // 82%
+                const SizedBox(height: 20),
+                
+                // Battery Level + Stats Row
+                _buildBatteryStatsRow(state),
+                
+                const SizedBox(height: 15),
+                const Divider(color: Colors.grey, thickness: 1.5),
+                const SizedBox(height: 15),
+                
+                // Banner Estación
+                StationPromoBanner(
+                  title: '¡Nueva estación habilitada!',
+                  description:
+                      'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
                 ),
-                const SizedBox(width: 50),
-                // Savings Stats Card
-                const SavingsStatsCard(distanceKm: 72, savingsAmount: 23.50),
+                const SizedBox(height: 25),
+                const BlueButton(nameButton: 'Pagar'),
+                const SizedBox(height: 20),
               ],
-            ),
-            SizedBox(height: 15),
-            Divider(color: Colors.grey, thickness: 1.5),
-            const SizedBox(height: 15),
-            // Promotional Banner
-            StationPromoBanner(
-              title: '¡Nueva estación habilitada!',
-              description:
-                  'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
-            ),
-            SizedBox(height: 25),
-            BlueButton(nameButton: 'Pagar'),
-            SizedBox(height: 20),
-          ],
+            );
+          },
         ),
       ),
     );
+  }
+
+  Widget _buildBatteryStatsRow(BatteryState state) {
+
+    if (state is BatteryLoading || state is BatteryInitial) {
+      return const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: CircularProgressIndicator(
+              color: AppTheme.primaryColor,
+            ),
+          ),
+        ],
+      );
+    }
+
+    // Show error state
+    if (state is BatteryError) {
+      return const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.error_outline, color: Colors.red, size: 40),
+          SizedBox(width: 10),
+          Text(
+            'Error al cargar datos',
+            style: TextStyle(color: Colors.red),
+          ),
+        ],
+      );
+    }
+
+    if (state is BatteryLoaded) {
+      final battery = state.battery;
+      
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [          
+          BatteryCircleIndicator(
+            batteryLevel: battery.chargeLevel,
+            size: 120,
+          ),
+          const SizedBox(width: 50),          
+          SavingsStatsCard(
+            distanceKm: battery.currentRangeKm,
+            savingsAmount: battery.estimatedSavings,
+          ),
+        ],
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
