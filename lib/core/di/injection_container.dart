@@ -8,19 +8,14 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   
-  // Feature Battery
-  
-  // Cubit (Presentation Layer)
   sl.registerFactory<BatteryCubit>(
     () => BatteryCubit(repository: sl())
   );
 
-  // Repository (Domain Layer)
   sl.registerLazySingleton<BatteryRepository>(
     () => BatteryRepositoryImpl(dataSource: sl())
   );
   
-  // Data Source (Data Layer)
   // -Actualmente usamos Mock (ficticios)
   sl.registerLazySingleton<BatteryRemoteDataSource>(
     () => BatteryMockDataSource()
