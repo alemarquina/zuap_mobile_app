@@ -7,10 +7,11 @@
 ![Flutter](https://img.shields.io/badge/Flutter-25A6D5?style=for-the-badge&logo=Flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
 ## Integraciones
 
-El ecosistema de Zuap utiliza una arquitectura distribuida que integra la aplicación móvil con dos proveedores de Backend distintos:
+El ecosistema de Zuap utiliza una arquitectura distribuida que integra la aplicación móvil con dos proveedores de Backend distintos (Adaptación con Odoo)
 
 * **Mapas:** Google Maps / Waze
 * **Notificaciones:** Firebase Cloud Messaging (FCM)
@@ -82,5 +83,5 @@ zuap_mobile_app/
 └── zuap_mobiel_app.iml
 ```
              
-**Software Company**: Digilab
-**Software Developer**: Alessandro Marquina
+* **Software Company**: Digilab
+* **Software Developer**: Alessandro Marquina
