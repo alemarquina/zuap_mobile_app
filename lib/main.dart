@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zuap_mobile_app/core/providers/global_providers.dart';
 import 'package:zuap_mobile_app/core/routes/app_routes.dart';
-import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_cubit.dart';
-import 'package:zuap_mobile_app/features/stations/presentation/cubit/station_cubit.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'core/di/injection_container.dart' as di;
 
