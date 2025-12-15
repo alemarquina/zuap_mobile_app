@@ -18,6 +18,7 @@ class BatteryMockDataSource implements BatteryRemoteDataSource {
 
   void _startSimulation() {
     int counter = 0;
+    int hoursDiference = (32 - counter).abs();
     _timer = Timer.periodic(const Duration(seconds: 20), (timer) {
       counter++;
 
@@ -30,7 +31,7 @@ class BatteryMockDataSource implements BatteryRemoteDataSource {
         cycles: 150 + (counter ~/ 10),
         chargeLevel: charge,
         currentRangeKm: 72 + (counter * 0.5),
-        timeLeft: '8:${(32 - counter).toString().padLeft(2, '0')} h',
+        timeLeft: '8:${(hoursDiference).toString().padLeft(2, '0')} h',
         totalKm: 450 + counter.toDouble(),
         estimatedSavings: 53.30 + (counter * 0.2),
       );
