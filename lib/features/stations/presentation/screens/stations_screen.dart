@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/cubit/station_cubit.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/cubit/station_state.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_card.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_search_modal.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
-import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 
-class StationScreen extends StatefulWidget {
+class StationScreen extends StatelessWidget {
   const StationScreen({super.key});
 
-  @override
-  State<StationScreen> createState() => _StationScreenState();
-}
-
-class _StationScreenState extends State<StationScreen> {
-  final _stationController = TextEditingController();
-
-  @override
-  void dispose() {
-    _stationController.dispose();
-    super.dispose();
+  void _showSearchModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+        child: StationSearchModal(
+          onSearch: (query, district, availability) {
+            context.read<StationCubit>().searchStations(
+                  query: query,
+                  district: district,
+                  availability: availability,
+                );
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -26,73 +35,204 @@ class _StationScreenState extends State<StationScreen> {
     return AppScaffold(
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-          child: Column(
-            children: [
-              // Header with back button and title
-              HeaderTitle(titleText: 'Estaciones'),
-              const SizedBox(height: 30),
-              CustTextField(
-                labelText: 'Buscar estación',
-                controller: _stationController,
-                keyboardType: TextInputType.text,
-              ),
-
-              SizedBox(height: 30),
-
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'ESTACIONES CERCANAS',
-                  style: TextStyle(
-                    color: AppTheme.darkColor,
-                    fontSize: 14,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 0.5,
+        child: Column(
+          children: [
+            // Header
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 40, 25, 0),
+              child: Column(
+                children: [
+                  const HeaderTitle(titleText: 'Estaciones'),
+                  const SizedBox(height: 30),
+                  
+                  // Search button (opens modal)
+                  GestureDetector(
+                    onTap: () => _showSearchModal(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 14,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: Colors.grey[300]!,
+                          width: 1,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.search, color: Colors.grey[400]),
+                          const SizedBox(width: 12),
+                          Text(
+                            'Buscar estación',
+                            style: TextStyle(
+                              color: Colors.grey[400],
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 20),
+                  
+                  // Nearby suggestions placeholder
+                  BlocBuilder<StationCubit, StationState>(
+                    builder: (context, state) {
+                      if (state is StationLoaded && !state.isFiltered) {
+                        return Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Sugerencias cerca de ti',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 13,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
+            ),
 
-              const SizedBox(height: 30),
-              // Station Cards List
-              const StationCard(
-                name: 'Estación Tambo',
-                availableBatteries: 4,
-                distance: '412 m',
-                address: 'Av Libertadores 456',
-                status: 'Abierto',
-                schedule: 'Lunes a Domingo de 7:00 a 9:00',
-                imagePath:
-                    'https://www.infobae.com/new-resizer/o277JOptGR4y5QwKI08RN0f02AI=/arc-anglerfish-arc2-prod-infobae/public/GT4DF2PS7NA6VJ5JZBRGIJ3G44.jpg',
-              ),
+            // Stations list
+            Expanded(
+              child: BlocBuilder<StationCubit, StationState>(
+                builder: (context, state) {
+                  if (state is StationLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppTheme.primaryColor,
+                      ),
+                    );
+                  }
 
-              const SizedBox(height: 15),
+                  if (state is StationError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.error_outline,
+                            color: Colors.red,
+                            size: 48,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            'Error al cargar estaciones',
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
 
-              const StationCard(
-                name: 'Estación Primax',
-                availableBatteries: 2,
-                distance: '1.7 Km',
-                address: 'Av. Javier Prado 1234',
-                status: 'Abierto',
-                schedule: '24 Horas',
-                imagePath:
-                    'https://agesp.org.pe/wp-content/uploads/2023/10/primax.jpg',
+                  if (state is StationLoaded) {
+                    final stations = state.displayStations;
+
+                    if (stations.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              color: Colors.grey[400],
+                              size: 48,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No se encontraron estaciones',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextButton(
+                              onPressed: () {
+                                context.read<StationCubit>().clearFilters();
+                              },
+                              child: const Text('Limpiar filtros'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    return ListView.separated(
+                      padding: const EdgeInsets.fromLTRB(25, 0, 25, 40),
+                      itemCount: stations.length + 1,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 15),
+                      itemBuilder: (context, index) {
+                        // Header
+                        if (index == 0) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  state.isFiltered
+                                      ? 'RESULTADOS (${stations.length})'
+                                      : 'ESTACIONES CERCANAS',
+                                  style: const TextStyle(
+                                    color: AppTheme.darkColor,
+                                    fontSize: 14,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                if (state.isFiltered)
+                                  TextButton(
+                                    onPressed: () {
+                                      context.read<StationCubit>().clearFilters();
+                                    },
+                                    child: const Text(
+                                      'Limpiar',
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: AppTheme.primaryColor,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          );
+                        }
+
+                        // Station cards
+                        final station = stations[index - 1];
+                        return StationCard(
+                          name: station.name,
+                          availableBatteries: station.availableBatteries,
+                          distance: '-- km', // TODO: Calculate distance
+                          address: station.address,
+                          status: station.status,
+                          schedule: station.openHours,
+                          imagePath: station.image,
+                        );
+                      },
+                    );
+                  }
+
+                  return const SizedBox.shrink();
+                },
               ),
-              const SizedBox(height: 15),
-              const StationCard(
-                name: 'Estación Petroperú',
-                availableBatteries: 10,
-                distance: '2.4 Km',
-                address: 'Av. La Marina 500',
-                status: 'Cerrado',
-                schedule: 'Lunes a Domingo de 12:00 a 23:00',
-                imagePath:
-                    'https://www.petroperu.com.pe/Docs/spa/images/productos/cliente_grifos.jpg',
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

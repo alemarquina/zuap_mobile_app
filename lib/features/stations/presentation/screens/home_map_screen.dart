@@ -4,6 +4,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_cubit.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/cubit/battery_state.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/widgets/battery_circle_indicator.dart';
+import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/cubit/station_cubit.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/cubit/station_state.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_info_window.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/map_overlay_buttons.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_promo_banner.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/widgets/savings_stats_card.dart';
@@ -25,29 +29,95 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
     zoom: 14.0,
   );
 
+  Set<Marker> _markers = {};
+  GoogleMapController? _mapController;
+  
+  // Estado para el custom InfoWindow
+  Station? _selectedStation;
+  bool _showInfoWindow = false;
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: GoogleMap(
-              initialCameraPosition: _initialPosition,
-              onMapCreated: (GoogleMapController controller) {},
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
-              zoomControlsEnabled: false,
-              mapToolbarEnabled: false,
-              compassEnabled: false,
+      body: BlocListener<StationCubit, StationState>(
+        listener: (context, state) {
+          if (state is StationLoaded) {
+            _updateMarkers(state.allStations);
+          }
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: GoogleMap(
+                initialCameraPosition: _initialPosition,
+                onMapCreated: (GoogleMapController controller) {
+                  _mapController = controller;
+                },
+                markers: _markers,
+                myLocationEnabled: true,
+                myLocationButtonEnabled: false,
+                zoomControlsEnabled: false,
+                mapToolbarEnabled: false,
+                compassEnabled: false,
+                onTap: (_) {
+                  // Ocultar InfoWindow al tocar el mapa
+                  setState(() {
+                    _showInfoWindow = false;
+                    _selectedStation = null;
+                  });
+                },
+              ),
             ),
-          ),
 
-          const Positioned(top: 50, right: 16, child: MapOverlayButtons()),
+            // Custom InfoWindow flotante
+            if (_showInfoWindow && _selectedStation != null)
+              Positioned(
+                top: MediaQuery.of(context).size.height * 0.3,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: StationInfoWindow(
+                    station: _selectedStation!,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/station_details_screen',
+                        arguments: _selectedStation,
+                      );
+                    },
+                  ),
+                ),
+              ),
 
-          Positioned(left: 0, right: 0, bottom: 0, child: _buildBottomPanel()),
-        ],
+            const Positioned(top: 50, right: 16, child: MapOverlayButtons()),
+
+            Positioned(left: 0, right: 0, bottom: 0, child: _buildBottomPanel()),
+          ],
+        ),
       ),
     );
+  }
+
+  void _updateMarkers(List<Station> stations) {
+    setState(() {
+      _markers = stations.map((station) {
+        return Marker(
+          markerId: MarkerId(station.id),
+          position: station.location,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+          onTap: () {
+            setState(() {
+              _selectedStation = station;
+              _showInfoWindow = true;
+            });
+            // Animar cámara hacia la estación seleccionada
+            _mapController?.animateCamera(
+              CameraUpdate.newLatLng(station.location),
+            );
+          },
+        );
+      }).toSet();
+    });
   }
 
   Widget _buildBottomPanel() {
