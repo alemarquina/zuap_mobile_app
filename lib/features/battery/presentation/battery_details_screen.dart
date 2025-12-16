@@ -137,18 +137,25 @@ class BatteryDetailsScreen extends StatelessWidget {
                         const SizedBox(width: 20),
                         Expanded(
                           child: Container(
-                            height: double.infinity,
+                            height: double.infinity,                            
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,                              
                               children: [
+                                Text(
+                                  'Temperatura',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),                                
                                 CustomPaint(
                                   size: const Size(40, 80),
                                   painter: _ThermometerPainter(),
-                                ),
+                                ),      
                               ],
                             ),
                           ),
@@ -216,13 +223,14 @@ class BatteryDetailsScreen extends StatelessWidget {
   Widget _buildInfoBox(String title, String? value) {
     return Expanded(
       child: Container(
+        padding: EdgeInsets.symmetric(vertical: 20),
         height: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
               title,
@@ -230,8 +238,7 @@ class BatteryDetailsScreen extends StatelessWidget {
                 color: Colors.black,
                 fontWeight: FontWeight.w900,
               ),
-            ),
-            const SizedBox(height: 15),
+            ),            
             _DataOrSkeleton(
               isLoading: value == null,
               width: 60,
@@ -403,7 +410,7 @@ class _ThermometerPainter extends CustomPainter {
 
     final stemRect = Rect.fromLTWH(
       centerX - stemWidth / 2,
-      0,
+      14,
       stemWidth,
       stemHeight,
     );
