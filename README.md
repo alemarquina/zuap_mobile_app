@@ -38,11 +38,9 @@ zuap_mobile_app/
 ├── lib/
 │   ├── core/
 │   │   ├── config/
-│   │   ├── errors/
-│   │   ├── network/
-│   │   ├── routes/
 │   │   ├── di/
-│   │   └── utils/
+│   │   ├── providers/
+│   │   └── routes/
 │   ├── features/
 │   │   ├── auth/
 │   │   │   ├── data/
