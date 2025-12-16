@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
@@ -6,21 +7,11 @@ import 'package:zuap_mobile_app/shared/widgets/button_transparent.dart';
 import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
 
 class StationDetails extends StatelessWidget {
-  final String name;
-  final String address;
-  final String status;
-  final String schedule;
-  final int availableBatteries;
-  final String imagePath;
+  final Station station;
 
   const StationDetails({
     super.key,
-    required this.name,
-    required this.address,
-    required this.status,
-    required this.schedule,
-    required this.availableBatteries,
-    this.imagePath = '',
+    required this.station,
   });
 
   @override
@@ -43,9 +34,9 @@ class StationDetails extends StatelessWidget {
                 ),
                 clipBehavior:
                     Clip.antiAlias, // Ensure image respects border radius
-                child: imagePath.isNotEmpty
+                child: station.image.isNotEmpty
                     ? Image.network(
-                        imagePath,
+                        station.image,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Center(
@@ -79,7 +70,7 @@ class StationDetails extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               Text(
-                name,
+                station.name,
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w900,
@@ -89,7 +80,7 @@ class StationDetails extends StatelessWidget {
               const SizedBox(height: 5),
               // Address
               Text(
-                address,
+                station.address,
                 style: TextStyle(
                   color: AppTheme.darkGrayColor,
                   fontWeight: FontWeight.w500,
@@ -100,14 +91,14 @@ class StationDetails extends StatelessWidget {
               // Info Rows
               _buildInfoRow(
                 icon: Icons.home_outlined, // Using home icon for store/status
-                text: status,
+                text: station.status,
               ),
               const SizedBox(height: 15),
-              _buildInfoRow(icon: Icons.access_time, text: schedule),
+              _buildInfoRow(icon: Icons.access_time, text: station.openHours),
               const SizedBox(height: 15),
               _buildInfoRow(
                 icon: Icons.battery_charging_full_outlined,
-                text: 'Baterias Disponibles: $availableBatteries',
+                text: 'Baterias Disponibles: ${station.availableBatteries}',
               ),
               const SizedBox(height: 40),
               BlueButton(nameButton: 'Como llegar'),

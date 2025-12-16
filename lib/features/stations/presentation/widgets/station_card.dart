@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_details.dart';
@@ -33,17 +35,23 @@ class _StationCardState extends State<StationCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        // Create a Station object from the card data
+        final station = Station(
+          id: 'station_${widget.name.hashCode}',
+          name: widget.name,
+          address: widget.address,
+          location: const LatLng(-12.0464, -77.0428), // Default location
+          status: widget.status,
+          openHours: widget.schedule,
+          availableBatteries: widget.availableBatteries,
+          image: widget.imagePath,
+          district: 'Lima', // Default district
+        );
+
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => StationDetails(
-              name: widget.name,
-              availableBatteries: widget.availableBatteries,
-              address: widget.address,
-              status: widget.status,
-              schedule: widget.schedule,
-              imagePath: widget.imagePath,
-            ),
+            builder: (context) => StationDetails(station: station),
           ),
         );
       },

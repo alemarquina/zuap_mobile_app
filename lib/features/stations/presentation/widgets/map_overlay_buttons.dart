@@ -30,7 +30,7 @@ class MapOverlayButtons extends StatelessWidget {
           _buildCircularButton(
             icon: Icons.search,
             onPressed: () {
-              Navigator.pushNamed(context, '/station_screen');
+              Navigator.pushNamed(context, '/stations_list_screen');
             },
           ),
         ],
