@@ -4,8 +4,10 @@ import 'package:zuap_mobile_app/features/auth/presentation/login_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/register_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/battery_details_screen.dart';
+import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
+import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_details.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -13,7 +15,8 @@ class AppRoutes {
   static const String register = '/register';
   static const String resetPasswordScreen = '/reset_password_screen';
   static const String homeMapScreen = '/home_map_screen';
-  static const String stationScreen = '/station_screen';
+  static const String stationsListScreen = '/stations_list_screen';
+  static const String stationDetailsScreen = '/station_details_screen';
   static const String batteryDetailsScreen = '/battery_details_screen';
 
   static Map<String, WidgetBuilder> routes = {
@@ -22,7 +25,16 @@ class AppRoutes {
     register: (context) => const RegisterScreen(),
     resetPasswordScreen: (context) => const ForgottenPassword(),
     homeMapScreen: (context) => const HomeMapScreen(),
-    stationScreen: (context) => const StationScreen(),
+    stationsListScreen: (context) => const StationScreen(),
+    stationDetailsScreen: (context) {
+      final station = ModalRoute.of(context)?.settings.arguments as Station?;
+      if (station == null) {
+        // Si no se proporciona ninguna estación, navegue hacia atrás o muestre el error
+        Navigator.of(context).pop();
+        return const SizedBox.shrink();
+      }
+      return StationDetails(station: station);
+    },
     batteryDetailsScreen: (context) => const BatteryDetailsScreen(),
   };
 }
