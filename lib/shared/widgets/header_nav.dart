@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/menu_button.dart';
 
-class HeaderTitle extends StatefulWidget {
+class HeaderNav extends StatefulWidget {
   final String titleText;
 
-  const HeaderTitle({super.key, required this.titleText});
+  const HeaderNav({super.key, required this.titleText});
 
   @override
-  State<HeaderTitle> createState() => _HeaderTitleState();
+  State<HeaderNav> createState() => _HeaderNavState();
 }
 
-class _HeaderTitleState extends State<HeaderTitle> {
+class _HeaderNavState extends State<HeaderNav> {
   @override
   Widget build(BuildContext context) {
     return Row(
