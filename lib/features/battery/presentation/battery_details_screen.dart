@@ -22,7 +22,7 @@ class BatteryDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
               child: Column(
                 children: [
-                  const HeaderTitle(titleText: 'Batería'),
+                  const HeaderNav(titleText: 'Batería'),
                   const SizedBox(height: 40),
                   Align(
                     alignment: Alignment.centerLeft,

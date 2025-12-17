@@ -24,7 +24,7 @@ class StationDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HeaderTitle(titleText: 'Estación'),
+              const HeaderNav(titleText: 'Estación'),
               const SizedBox(height: 40),
               Container(
                 width: double.infinity,
