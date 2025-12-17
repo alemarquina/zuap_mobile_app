@@ -4,6 +4,7 @@ import 'package:zuap_mobile_app/features/auth/presentation/login_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/register_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/battery_details_screen.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/screens/user_profile_screen.dart';
 import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
@@ -18,6 +19,7 @@ class AppRoutes {
   static const String stationsListScreen = '/stations_list_screen';
   static const String stationDetailsScreen = '/station_details_screen';
   static const String batteryDetailsScreen = '/battery_details_screen';
+  static const String userProfileScreen = '/user_profile_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -36,5 +38,6 @@ class AppRoutes {
       return StationDetails(station: station);
     },
     batteryDetailsScreen: (context) => const BatteryDetailsScreen(),
+    userProfileScreen: (context) => const UserProfileScreen(),
   };
 }
