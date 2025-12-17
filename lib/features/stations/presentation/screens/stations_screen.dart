@@ -42,7 +42,7 @@ class StationScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(25, 40, 25, 0),
               child: Column(
                 children: [
-                  const HeaderTitle(titleText: 'Estaciones'),
+                  const HeaderNav(titleText: 'Estaciones'),
                   const SizedBox(height: 30),
                   
                   // Search button (opens modal)
