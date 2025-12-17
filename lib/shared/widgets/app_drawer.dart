@@ -68,7 +68,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Usuario',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/user_profile_screen');
                       },
                     ),
                     _buildMenuItem(
