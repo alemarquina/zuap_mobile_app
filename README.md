@@ -50,11 +50,23 @@ zuap_mobile_app/
 │   │   │   ├── data/
 │   │   │   ├── domain/
 │   │   │   └── presentation/
+│   │   ├── info/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── notif/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
 │   │   ├── profile/
 │   │   │   ├── data/
 │   │   │   ├── domain/
 │   │   │   └── presentation/
 │   │   ├── stations/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
+│   │   ├── support/
 │   │   │   ├── data/
 │   │   │   ├── domain/
 │   │   │   └── presentation/
