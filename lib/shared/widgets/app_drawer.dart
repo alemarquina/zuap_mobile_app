@@ -54,7 +54,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Notificaciones',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/notifications_screen');
                       },
                     ),
                     _buildMenuItem(
