@@ -96,7 +96,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Quienes somos',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/about_us_screen');
                       },
                     ),
                   ],
