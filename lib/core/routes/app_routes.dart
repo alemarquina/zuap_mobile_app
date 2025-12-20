@@ -4,7 +4,7 @@ import 'package:zuap_mobile_app/features/auth/presentation/login_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/register_screen.dart';
 import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/battery_details_screen.dart';
-import 'package:zuap_mobile_app/features/info/presentation/screens/abous_us_screen.dart';
+import 'package:zuap_mobile_app/features/info/presentation/screens/about_us_screen.dart';
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/user_profile_screen.dart';
 import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
