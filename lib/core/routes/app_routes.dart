@@ -6,7 +6,7 @@ import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.da
 import 'package:zuap_mobile_app/features/battery/presentation/battery_details_screen.dart';
 import 'package:zuap_mobile_app/features/info/presentation/screens/about_us_screen.dart';
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
-import 'package:zuap_mobile_app/features/profile/presentation/screens/user_profile_screen.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/screens/user_screen.dart';
 import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
@@ -42,7 +42,7 @@ class AppRoutes {
       return StationDetails(station: station);
     },
     batteryDetailsScreen: (context) => const BatteryDetailsScreen(),
-    userProfileScreen: (context) => const UserProfileScreen(),
+    userProfileScreen: (context) => const UserScreen(),
     notificactionsScreen: (context) => const NotificationsScreen(),
     aboutUsScreen: (context) => const AboutUsScreen()
   };
