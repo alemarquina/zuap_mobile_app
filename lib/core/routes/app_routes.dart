@@ -6,6 +6,7 @@ import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.da
 import 'package:zuap_mobile_app/features/battery/presentation/battery_details_screen.dart';
 import 'package:zuap_mobile_app/features/info/presentation/screens/about_us_screen.dart';
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/user_screen.dart';
 import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
@@ -24,6 +25,7 @@ class AppRoutes {
   static const String userProfileScreen = '/user_profile_screen';
   static const String notificactionsScreen = '/notifications_screen';
   static const String aboutUsScreen = '/about_us_screen';
+  static const String profileScreen = '/profile_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -44,6 +46,7 @@ class AppRoutes {
     batteryDetailsScreen: (context) => const BatteryDetailsScreen(),
     userProfileScreen: (context) => const UserScreen(),
     notificactionsScreen: (context) => const NotificationsScreen(),
-    aboutUsScreen: (context) => const AboutUsScreen()
+    aboutUsScreen: (context) => const AboutUsScreen(),
+    profileScreen: (context) => const ProfileScreen()
   };
 }
