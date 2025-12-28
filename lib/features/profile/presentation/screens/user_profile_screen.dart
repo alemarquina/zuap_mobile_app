@@ -48,7 +48,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   style: TextStyle(color: AppTheme.primaryColor),
                 ),
                 SizedBox(height: 40),
-                Row(
+                Row(                  
                   children: [
                     Expanded(
                       child: CardInfoPrimaryUser(
@@ -56,8 +56,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                         value: 50,
                         backgroundColor: AppTheme.acentoColor,
                       ),
-                    ),
-                    SizedBox(width: 20),
+                    ),                   
+                    const SizedBox(width: 20),
                     Expanded(
                       child: CardInfoPrimaryUser(
                         name: 'Puntos',

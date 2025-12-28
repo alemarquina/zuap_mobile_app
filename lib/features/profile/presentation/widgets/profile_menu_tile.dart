@@ -16,7 +16,7 @@ class _ProfileMenuTileState extends State<ProfileMenuTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: widget.onTap,
-      child: Expanded(child: Container(        
+      child: Container(        
         height: 110,        
         padding: EdgeInsets.symmetric(horizontal: 25),
         decoration: BoxDecoration(
@@ -30,14 +30,14 @@ class _ProfileMenuTileState extends State<ProfileMenuTile> {
             Row(
               children: [
                 Icon(widget.iconName, size: 35),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Text(widget.name),
               ],
             ),
             Icon(Icons.keyboard_arrow_right, size: 40)
           ],
         ),
-      )),
+      ),
     );
   }
 }
