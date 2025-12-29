@@ -23,7 +23,7 @@ class NotificationsScreen extends StatelessWidget {
               return ListView(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25,
-                  vertical: 25,
+                  vertical: 30,
                 ),
                 children: [
                   const HeaderNav(titleText: 'Notificaciones'),

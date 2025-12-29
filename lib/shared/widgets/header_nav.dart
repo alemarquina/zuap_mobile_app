@@ -28,7 +28,7 @@ class _HeaderNavState extends State<HeaderNav> {
         // Título centrado
         Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 10),
+            padding: const EdgeInsets.only(top: 4),
             child: Text(
               widget.titleText,
               style: const TextStyle(

@@ -4,7 +4,7 @@ import 'package:zuap_mobile_app/core/routes/app_routes.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'core/di/injection_container.dart' as di;
 
-void main() async {  
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(const MainWidget());
@@ -15,13 +15,13 @@ class MainWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GlobalProviders(      
+    return GlobalProviders(
       child: MaterialApp(
         title: 'Zuap Mobile App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.themeZuap,
         initialRoute: AppRoutes.splash,
-        routes: AppRoutes.routes,      
+        routes: AppRoutes.routes,
       ),
     );
   }
