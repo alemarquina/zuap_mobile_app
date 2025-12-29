@@ -18,7 +18,7 @@ class _UserScreenState extends State<UserScreen> {
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Column(
             children: [
               const HeaderNav(titleText: 'Usuario'),
@@ -80,25 +80,33 @@ class _UserScreenState extends State<UserScreen> {
               ProfileMenuTile(
                 iconName: Icons.subtitles_outlined,
                 name: 'Mi Plan',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.of(context)
+                },
               ),
               const SizedBox(height: 10),
               ProfileMenuTile(
                 iconName: Icons.emoji_events_outlined,
                 name: 'Mis logros',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/skills_screen')
+                },
               ),
               const SizedBox(height: 10),
               ProfileMenuTile(
                 iconName: Icons.payments_outlined,
                 name: 'Historial de pagos',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/payments_history_screen')
+                },
               ),
               const SizedBox(height: 10),
               ProfileMenuTile(
                 iconName: Icons.build_circle_outlined,
                 name: 'Historial de mantenimiento',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/maintenance_history_screen')
+                },
               ),
               const SizedBox(height: 10),
               ProfileMenuTile(

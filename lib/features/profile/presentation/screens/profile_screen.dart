@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/features/auth/domain/entities/register_form_options.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
+import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
+import 'package:zuap_mobile_app/shared/widgets/custom_dropdown.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_text_field.dart';
 import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
 
@@ -28,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Column(
             children: [
               HeaderNav(titleText: 'Perfil de Usuario'),
@@ -40,10 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 40),
               IndexedStack(
                 index: _selectedView == ProfileViewType.usuario ? 0 : 1,
-                children: const [
-                  UserProfileView(),
-                  MotoProfileView(),
-                ],
+                children: const [UserProfileView(), MotoProfileView()],
               ),
             ],
           ),
@@ -66,6 +66,7 @@ class SelectOptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 65,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
@@ -79,7 +80,7 @@ class SelectOptionButton extends StatelessWidget {
               onTap: () => onViewChanged(ProfileViewType.usuario),
               splashColor: AppTheme.bgColor,
               child: Container(
-                height: 80,
+                height: 65,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadiusDirectional.only(
                     topStart: Radius.circular(50),
@@ -108,7 +109,7 @@ class SelectOptionButton extends StatelessWidget {
               onTap: () => onViewChanged(ProfileViewType.moto),
               splashColor: AppTheme.bgColor,
               child: Container(
-                height: 80,
+                height: 65,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadiusDirectional.only(
                     topEnd: Radius.circular(50),
@@ -146,29 +147,33 @@ class UserProfileView extends StatefulWidget {
 }
 
 class _UserProfileViewState extends State<UserProfileView> {
-  late TextEditingController _correoController;
-  late TextEditingController _nombresController;
-  late TextEditingController _apellidosController;
-  late TextEditingController _telefonoController;
+  String? _selectedDocument;
+  late TextEditingController _emailController;
+  late TextEditingController _nameController;
+  late TextEditingController _surnameController;
+  late TextEditingController _numPhoneController;
   late TextEditingController _tipoDocController;
+  late TextEditingController _numDocController;
 
   @override
   void initState() {
     super.initState();
-    _correoController = TextEditingController();
-    _nombresController = TextEditingController();
-    _apellidosController = TextEditingController();
-    _telefonoController = TextEditingController();
+    _emailController = TextEditingController(text: 'juliancasablancas@gmail.com');
+    _nameController = TextEditingController(text: 'Julian');
+    _surnameController = TextEditingController(text: 'Casablancas');
+    _numPhoneController = TextEditingController(text: '23232323');
     _tipoDocController = TextEditingController();
+    _numDocController = TextEditingController(text: '99949343');
   }
 
   @override
   void dispose() {
-    _correoController.dispose();
-    _nombresController.dispose();
-    _apellidosController.dispose();
-    _telefonoController.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    _surnameController.dispose();
+    _numPhoneController.dispose();
     _tipoDocController.dispose();
+    _numDocController.dispose();
     super.dispose();
   }
 
@@ -189,7 +194,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                   child: CircularProgressIndicator(
                     value: loadingProgress.expectedTotalBytes != null
                         ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
+                              loadingProgress.expectedTotalBytes!
                         : null,
                   ),
                 );
@@ -201,31 +206,32 @@ class _UserProfileViewState extends State<UserProfileView> {
           ),
         ),
         const SizedBox(height: 40),
-        CustTextField(
-          labelText: 'Correo',
-          controller: _correoController,
-        ),
+        CustTextField(labelText: 'Correo', controller: _emailController, keyboardType: TextInputType.emailAddress,),
         const SizedBox(height: 30),
-        CustTextField(
-          labelText: 'Nombres',
-          controller: _nombresController,
-        ),
+        CustTextField(labelText: 'Nombres', controller: _nameController),
         const SizedBox(height: 30),
-        CustTextField(
-          labelText: 'Apellidos',
-          controller: _apellidosController,
-        ),
+        CustTextField(labelText: 'Apellidos', controller: _surnameController),
         const SizedBox(height: 30),
         CustTextField(
           labelText: 'Telefono',
-          controller: _telefonoController,
+          controller: _numPhoneController,
           keyboardType: TextInputType.phone,
         ),
         const SizedBox(height: 30),
-        CustTextField(
+        CustomDropdown(
           labelText: 'Tipo de documento',
-          controller: _tipoDocController,
+          options: RegisterFormOptions.documentTypes,
+          value: _selectedDocument,
+          onChanged: (newValue) {
+            setState(() {
+              _selectedDocument = newValue;
+            });
+          },
         ),
+        const SizedBox(height: 30),
+        CustTextField(labelText: 'N° Documento', controller: _numDocController),
+        const SizedBox(height: 30),
+        BlueButton(nameButton: 'Editar Perfil'),
       ],
     );
   }
@@ -245,8 +251,8 @@ class _MotoProfileViewState extends State<MotoProfileView> {
   @override
   void initState() {
     super.initState();
-    _modeloController = TextEditingController();
-    _matriculaController = TextEditingController();
+    _modeloController = TextEditingController(text: 'Scooter 150');
+    _matriculaController = TextEditingController(text: 'A1234');
   }
 
   @override
@@ -270,7 +276,7 @@ class _MotoProfileViewState extends State<MotoProfileView> {
           ),
           child: ClipOval(
             child: Image.network(
-              'https://smartmoveperu.com/wp-content/uploads/2024/11/Scooter-Electrico-Segway-ZT3-Pro-Peru.png', 
+              'https://smartmoveperu.com/wp-content/uploads/2024/11/Scooter-Electrico-Segway-ZT3-Pro-Peru.png',
               fit: BoxFit.contain,
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
@@ -278,47 +284,27 @@ class _MotoProfileViewState extends State<MotoProfileView> {
                   child: CircularProgressIndicator(
                     value: loadingProgress.expectedTotalBytes != null
                         ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
+                              loadingProgress.expectedTotalBytes!
                         : null,
                   ),
                 );
               },
               errorBuilder: (context, error, stackTrace) {
-                return const Icon(Icons.two_wheeler, size: 100, color: Colors.grey);
+                return const Icon(
+                  Icons.two_wheeler,
+                  size: 100,
+                  color: Colors.grey,
+                );
               },
             ),
           ),
         ),
         const SizedBox(height: 40),
-        CustTextField(
-          labelText: 'Modelo',
-          controller: _modeloController,
-        ),
+        CustTextField(labelText: 'Modelo', controller: _modeloController),
         const SizedBox(height: 30),
-        CustTextField(
-          labelText: 'Matrícula',
-          controller: _matriculaController,
-        ),
+        CustTextField(labelText: 'Matrícula', controller: _matriculaController),
         const SizedBox(height: 40),
-        Container(
-          width: double.infinity,
-          height: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: AppTheme.primaryColor, width: 2),
-            color: Colors.white,
-          ),
-          child: Center(
-            child: Text(
-              'Editar perfil',
-              style: TextStyle(
-                color: AppTheme.primaryColor,
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
+        BlueButton(nameButton: 'Editar Perfil')
       ],
     );
   }
