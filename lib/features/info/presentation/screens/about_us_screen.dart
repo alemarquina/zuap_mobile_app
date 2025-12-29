@@ -18,7 +18,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           children: [
             HeaderNav(titleText: 'Sobre nosotros'),
             SizedBox(height: 35),          
