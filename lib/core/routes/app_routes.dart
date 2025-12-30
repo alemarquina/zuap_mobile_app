@@ -16,6 +16,7 @@ import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_details.dart';
+import 'package:zuap_mobile_app/features/swap/presentation/screens/history_swap_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -34,6 +35,7 @@ class AppRoutes {
   static const String paymentsHistoryScreen = '/payments_history_screen';
   static const String maintenanceHistoryScreen = '/maintenance_history_screen' ;
   static const String statsScreen = '/stats_screen';
+  static const String historySwapScreen = '/history_swap_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -60,5 +62,6 @@ class AppRoutes {
     paymentsHistoryScreen: (context) => const PaymentsHistoryScreen(),
     maintenanceHistoryScreen: (context) => const MaintenanceHistoryScreen(),
     statsScreen: (context) => const StatsScreen(),
+    historySwapScreen: (context) => const HistorySwapScreen(),
   };
 }
