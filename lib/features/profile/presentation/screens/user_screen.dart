@@ -112,7 +112,9 @@ class _UserScreenState extends State<UserScreen> {
               ProfileMenuTile(
                 iconName: Icons.leaderboard_outlined,
                 name: 'Estadísticas',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/stats_screen')
+                },
               ),
               const SizedBox(height: 10),
               ProfileMenuTile(
