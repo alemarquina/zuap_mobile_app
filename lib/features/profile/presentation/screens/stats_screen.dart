@@ -6,6 +6,7 @@ import 'package:zuap_mobile_app/shared/widgets/app_scaffold.dart';
 import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
 import 'package:zuap_mobile_app/shared/widgets/custom_dropdown.dart';
 import 'package:zuap_mobile_app/shared/widgets/header_nav.dart';
+import 'package:zuap_mobile_app/features/battery/presentation/widgets/stats_bar_chart.dart';
 
 class StatsScreen extends StatefulWidget {
   const StatsScreen({super.key});
@@ -40,12 +41,13 @@ class _StatsScreenState extends State<StatsScreen> {
                     }),
                   },
                 ),
+
                 CardStats(
                   numSwap: 4,
                   kmTraveled: 70,
                   hoursUse: 27,
                   coNotEmitted: 4,
-                ),
+                ),                
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 5,
@@ -64,9 +66,16 @@ class _StatsScreenState extends State<StatsScreen> {
                     ),
                   ],
                 ),
-                BlueButton(nameButton: 'Descargar Reporte', onPressed: () => {
-                  Navigator.pop(context)
-                },)
+                StatsBarChart.withAlternatingColors(
+                  values: [60, 85, 45, 95, 70, 55, 80, 40, 75, 65, 50, 90],
+                  primaryColor: AppTheme.primaryColor,
+                  secondaryColor: AppTheme.acentoColor,
+                ),
+                const SizedBox(height: 5),
+                BlueButton(
+                  nameButton: 'Descargar Reporte',
+                  onPressed: () => {Navigator.pop(context)},
+                ),
               ],
             ),
           ),
