@@ -58,6 +58,10 @@ zuap_mobile_app/
 │   │   │   ├── data/
 │   │   │   ├── domain/
 │   │   │   └── presentation/
+│   │   ├── payments/
+│   │   │   ├── data/
+│   │   │   ├── domain/
+│   │   │   └── presentation/
 │   │   ├── profile/
 │   │   │   ├── data/
 │   │   │   ├── domain/
@@ -74,11 +78,7 @@ zuap_mobile_app/
 │   │   │   ├── data/
 │   │   │   ├── domain/
 │   │   │   └── presentation/
-│   │   ├── vehicles/
-│   │   │   ├── data/
-│   │   │   ├── domain/
-│   │   │   └── presentation/
-│   │   └── wallet/
+│   │   └── vehicles/
 │   │       ├── data/
 │   │       ├── domain/
 │   │       └── presentation/
