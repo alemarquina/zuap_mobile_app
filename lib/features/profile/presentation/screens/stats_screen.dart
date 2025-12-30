@@ -1,6 +1,4 @@
 import 'dart:core';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:zuap_mobile_app/features/battery/domain/entities/date_filter.dart';
 import 'package:zuap_mobile_app/shared/theme/app_theme.dart';

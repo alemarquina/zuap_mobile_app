@@ -19,7 +19,7 @@ class BatteryDetailsScreen extends StatelessWidget {
         child: BlocBuilder<BatteryCubit, BatteryState>(
           builder: (context, state) {
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
               child: Column(
                 children: [
                   const HeaderNav(titleText: 'Batería'),
