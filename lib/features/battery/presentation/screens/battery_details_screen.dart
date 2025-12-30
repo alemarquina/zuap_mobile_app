@@ -206,7 +206,7 @@ class BatteryDetailsScreen extends StatelessWidget {
                   BlueButton(
                     nameButton: 'Historial de Cambios',
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/history_swap_screen');
                     },
                   ),
                 ],

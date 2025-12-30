@@ -75,7 +75,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Historial de cambios',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/history_swap_screen');
                       },
                     ),
                     _buildMenuItem(
