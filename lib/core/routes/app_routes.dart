@@ -10,6 +10,7 @@ import 'package:zuap_mobile_app/features/notif/presentation/screens/notification
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_history_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/goals_screen.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/screens/stats_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/user_screen.dart';
 import 'package:zuap_mobile_app/features/stations/domain/entities/station.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_screen.dart';
@@ -32,6 +33,7 @@ class AppRoutes {
   static const String skillsScreen = '/skills_screen';
   static const String paymentsHistoryScreen = '/payments_history_screen';
   static const String maintenanceHistoryScreen = '/maintenance_history_screen' ;
+  static const String statsScreen = '/stats_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -57,5 +59,6 @@ class AppRoutes {
     skillsScreen: (context) => const GoalsScreen(),
     paymentsHistoryScreen: (context) => const PaymentsHistoryScreen(),
     maintenanceHistoryScreen: (context) => const MaintenanceHistoryScreen(),
+    statsScreen: (context) => const StatsScreen(),
   };
 }
