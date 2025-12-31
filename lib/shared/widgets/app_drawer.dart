@@ -61,7 +61,7 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'Planes',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/payments_plan_screen');
                       },
                     ),
                     _buildMenuItem(

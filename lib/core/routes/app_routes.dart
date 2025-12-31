@@ -8,7 +8,7 @@ import 'package:zuap_mobile_app/features/battery/presentation/screens/maintenanc
 import 'package:zuap_mobile_app/features/info/presentation/screens/about_us_screen.dart';
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_history_screen.dart';
-import 'package:zuap_mobile_app/features/payments/presentation/widgets/card_plan_type.dart';
+import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_plan_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/goals_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/stats_screen.dart';
@@ -37,7 +37,7 @@ class AppRoutes {
   static const String maintenanceHistoryScreen = '/maintenance_history_screen' ;
   static const String statsScreen = '/stats_screen';
   static const String historySwapScreen = '/history_swap_screen';
-  static const String cardPlanType = '/card_plan_type';
+  static const String paymentsPlanScreen = '/payments_plan_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -65,6 +65,6 @@ class AppRoutes {
     maintenanceHistoryScreen: (context) => const MaintenanceHistoryScreen(),
     statsScreen: (context) => const StatsScreen(),
     historySwapScreen: (context) => const HistorySwapScreen(),
-    cardPlanType: (context) => const CardPlanType(),
+    paymentsPlanScreen: (context) => const PaymentsPlanScreen(),
   };
 }
