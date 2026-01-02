@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
 
 class CardMonthlyPlan extends StatefulWidget {
-   
   final String namePlan;
   final String descrip;
   final num price;
-  final String dscrpBenefit;
+  final List<String> benefits;
+  final bool isPopular;
 
-
-  const CardMonthlyPlan({super.key, required this.namePlan, required this.descrip, required this.price, required this.dscrpBenefit});
+  const CardMonthlyPlan({
+    super.key,
+    required this.namePlan,
+    required this.descrip,
+    required this.price,
+    required this.benefits,
+    this.isPopular = false,
+  });
 
   @override
   State<CardMonthlyPlan> createState() => _CardMonthlyPlanState();
@@ -18,41 +25,91 @@ class CardMonthlyPlan extends StatefulWidget {
 class _CardMonthlyPlanState extends State<CardMonthlyPlan> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-      child: Column(
-        spacing: 10,
-        children: [
-          Text(widget.namePlan),
-          Text(widget.descrip),
-          Text('S/ ${widget.price}/mes'),
-          Text('Beneficios'),
-          Column(
-            spacing: 5,
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 10,
             children: [
-              Row(
-                children: [
-                  Icon(Icons.check_circle_outline_rounded),
-                  Text(widget.dscrpBenefit)
-                ],
+              Text(
+                widget.namePlan.toUpperCase(),
+                style: TextStyle(
+                  color: AppTheme.primaryColor,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                ),
               ),
-              Row(
-                children: [
-                  Icon(Icons.check_circle_outline_rounded),
-                  Text(widget.dscrpBenefit)
-                ],
+              Text(widget.descrip),
+              Text.rich(
+                TextSpan(
+                  text: 'S/ ${widget.price}',
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 37),
+                  children: [
+                    TextSpan(
+                      text: '/mes',
+                      style: TextStyle(
+                        color: AppTheme.darkGrayColor,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  Icon(Icons.check_circle_outline_rounded),
-                  Text(widget.dscrpBenefit)
-                ],
-              )
+              Text('Beneficios'),
+              Column(
+                spacing: 5,
+                children: widget.benefits
+                    .map(
+                      (benefit) => Row(
+                        spacing: 8,
+                        children: [
+                          Icon(
+                            Icons.check_circle_outline_rounded,
+                            color: AppTheme.primaryColor,
+                            size: 25,
+                          ),
+                          Expanded(child: Text(benefit)),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
+              const SizedBox(height: 10),
+              BlueButton(nameButton: 'Suscribete'),
             ],
           ),
-          BlueButton(nameButton: 'Suscribete')
-        ],
-      ),
+        ),
+        if (widget.isPopular)
+          Positioned(
+            top: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: AppTheme.secondaryColor,
+                borderRadius: BorderRadiusDirectional.only(
+                  topEnd: Radius.circular(20),
+                  bottomStart: Radius.circular(20),
+                ),
+              ),
+              child: Text(
+                'POPULAR',
+                style: TextStyle(
+                  color: AppTheme.primaryColor,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

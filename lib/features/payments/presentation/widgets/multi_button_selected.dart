@@ -3,27 +3,21 @@ import 'package:zuap_mobile_app/shared/theme/app_theme.dart';
 
 enum PlanViewType { monthly, yearly }
 
-class MultiButtonSelected extends StatefulWidget {
-  const MultiButtonSelected({super.key});
+class MultiButtonSelected extends StatelessWidget {
+  final PlanViewType selectedView;
+  final Function(PlanViewType) onViewChanged;
 
-  @override
-  State<MultiButtonSelected> createState() => _MultiButtonSelectedState();
-}
-
-class _MultiButtonSelectedState extends State<MultiButtonSelected> {
-  PlanViewType _selectedView = PlanViewType.monthly;
-
-  void _onViewChanged(PlanViewType viewType) {
-    setState(() {
-      _selectedView = viewType;
-    });
-  }
+  const MultiButtonSelected({
+    super.key,
+    required this.selectedView,
+    required this.onViewChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SelectOptionButton(
-      selectedView: _selectedView,
-      onViewChanged: _onViewChanged,
+      selectedView: selectedView,
+      onViewChanged: onViewChanged,
     );
   }
 }
