@@ -29,9 +29,9 @@ class AppDrawer extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
+            spacing: 70,
             children: [
-              MiniHeaderUser(),
-              SizedBox(height: 70),
+              MiniHeaderUser(),              
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.symmetric(vertical: 10),
