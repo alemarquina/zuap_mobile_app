@@ -120,7 +120,9 @@ class _UserScreenState extends State<UserScreen> {
               ProfileMenuTile(
                 iconName: Icons.qr_code_outlined,
                 name: 'Vincular moto',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/vehicle_link_scanner_screen')
+                },
               ),
               const SizedBox(height: 10),
               ProfileMenuTile(
