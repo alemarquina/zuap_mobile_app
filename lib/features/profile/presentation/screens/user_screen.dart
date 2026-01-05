@@ -128,7 +128,9 @@ class _UserScreenState extends State<UserScreen> {
               ProfileMenuTile(
                 iconName: Icons.settings_outlined,
                 name: 'Configuración',
-                onTap: () => {},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/config_screen')
+                },
               ),
             ],
           ),
