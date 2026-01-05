@@ -36,10 +36,7 @@ class _PaymentsShoppingCartScreenState
     // Get plan data from navigation arguments
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final String planName = args?['planName'] ?? 'Plan';
-    final String planType = args?['planType'] ?? 'monthly';
     final num price = args?['price'] ?? 0;
-    final String displayPeriod = planType == 'monthly' ? '/mes' : '/año';
 
     return AppScaffold(
       backgroundColor: AppTheme.bgColor,
