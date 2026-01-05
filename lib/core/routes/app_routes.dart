@@ -7,6 +7,7 @@ import 'package:zuap_mobile_app/features/battery/presentation/screens/battery_de
 import 'package:zuap_mobile_app/features/battery/presentation/screens/maintenance_history_screen.dart';
 import 'package:zuap_mobile_app/features/info/presentation/screens/about_us_screen.dart';
 import 'package:zuap_mobile_app/features/info/presentation/screens/faq_screen.dart';
+import 'package:zuap_mobile_app/features/info/presentation/screens/terms_service_screen.dart';
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_history_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_plan_screen.dart';
@@ -54,6 +55,7 @@ class AppRoutes {
   static const String swapSuccessScreen = '/swap_success_screen';
   static const String paymentsShoppingCartScreen = '/payments_shopping_cart_screen';
   static const String configScreen = '/config_screen';
+  static const String termsServiceScreen = '/terms_service_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -89,5 +91,6 @@ class AppRoutes {
     swapSuccessScreen: (context) => const SwapSuccessScreen(),
     paymentsShoppingCartScreen: (context) => const PaymentsShoppingCartScreen(),
     configScreen: (context) => const  ConfigScreen(),
+    termsServiceScreen: (context) => const TermsServiceScreen()
   };
 }
