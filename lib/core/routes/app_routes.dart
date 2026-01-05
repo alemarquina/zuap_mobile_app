@@ -19,7 +19,10 @@ import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_
 import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_details.dart';
 import 'package:zuap_mobile_app/features/swap/presentation/screens/history_swap_screen.dart';
-import 'package:zuap_mobile_app/features/vehicles/presentation/screens/qr_scanner_screen.dart';
+import 'package:zuap_mobile_app/features/swap/presentation/screens/station_qr_scanner_screen.dart';
+import 'package:zuap_mobile_app/features/swap/presentation/screens/battery_qr_scanner_screen.dart';
+import 'package:zuap_mobile_app/features/swap/presentation/screens/swap_success_screen.dart';
+import 'package:zuap_mobile_app/features/vehicles/presentation/screens/vehicle_link_scanner_screen.dart';
 import 'package:zuap_mobile_app/features/vehicles/presentation/screens/vehicle_link_details_screen.dart';
 
 class AppRoutes {
@@ -41,9 +44,12 @@ class AppRoutes {
   static const String statsScreen = '/stats_screen';
   static const String historySwapScreen = '/history_swap_screen';
   static const String paymentsPlanScreen = '/payments_plan_screen';
-  static const String qrScannerScreen = '/qr_scanner_screen';
+  static const String vehicleLinkScannerScreen = '/vehicle_link_scanner_screen';
   static const String vehicleLinkDetailsScreen = '/vehicle_link_details_screen';
   static const String faqScreen = '/faq_screen';
+  static const String stationQrScannerScreen = '/station_qr_scanner_screen';
+  static const String batteryQrScannerScreen = '/battery_qr_scanner_screen';
+  static const String swapSuccessScreen = '/swap_success_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -54,8 +60,7 @@ class AppRoutes {
     stationsListScreen: (context) => const StationScreen(),
     stationDetailsScreen: (context) {
       final station = ModalRoute.of(context)?.settings.arguments as Station?;
-      if (station == null) {
-        // Si no se proporciona ninguna estación, navegue hacia atrás o muestre el error
+      if (station == null) {        
         Navigator.of(context).pop();
         return const SizedBox.shrink();
       }
@@ -72,8 +77,11 @@ class AppRoutes {
     statsScreen: (context) => const StatsScreen(),
     historySwapScreen: (context) => const HistorySwapScreen(),
     paymentsPlanScreen: (context) => const PaymentsPlanScreen(),
-    qrScannerScreen: (context) => const QrScannerScreen(),
+    vehicleLinkScannerScreen: (context) => const VehicleLinkScannerScreen(),
     vehicleLinkDetailsScreen: (context) => const VehicleLinkDetailsScreen(), 
     faqScreen: (context) => const FaqScreen(),
+    stationQrScannerScreen: (context) => const StationQrScannerScreen(),
+    batteryQrScannerScreen: (context) => const BatteryQrScannerScreen(),
+    swapSuccessScreen: (context) => const SwapSuccessScreen(),
   };
 }
