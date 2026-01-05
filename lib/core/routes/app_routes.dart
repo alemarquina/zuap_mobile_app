@@ -10,6 +10,8 @@ import 'package:zuap_mobile_app/features/info/presentation/screens/faq_screen.da
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_history_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_plan_screen.dart';
+import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_shopping_cart_screen.dart';
+import 'package:zuap_mobile_app/features/profile/presentation/screens/config_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/goals_screen.dart';
 import 'package:zuap_mobile_app/features/profile/presentation/screens/stats_screen.dart';
@@ -50,6 +52,8 @@ class AppRoutes {
   static const String stationQrScannerScreen = '/station_qr_scanner_screen';
   static const String batteryQrScannerScreen = '/battery_qr_scanner_screen';
   static const String swapSuccessScreen = '/swap_success_screen';
+  static const String paymentsShoppingCartScreen = '/payments_shopping_cart_screen';
+  static const String configScreen = '/config_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -83,5 +87,7 @@ class AppRoutes {
     stationQrScannerScreen: (context) => const StationQrScannerScreen(),
     batteryQrScannerScreen: (context) => const BatteryQrScannerScreen(),
     swapSuccessScreen: (context) => const SwapSuccessScreen(),
+    paymentsShoppingCartScreen: (context) => const PaymentsShoppingCartScreen(),
+    configScreen: (context) => const  ConfigScreen(),
   };
 }
