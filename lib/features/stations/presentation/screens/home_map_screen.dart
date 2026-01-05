@@ -201,7 +201,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                 ),
                 const SizedBox(height: 25),
                 BlueButton(
-                  nameButton: 'Pagar',
+                  nameButton: 'Zuapea aquí',
                   onPressed: () {
                     Navigator.pushNamed(context, '/station_qr_scanner_screen');
                   },
