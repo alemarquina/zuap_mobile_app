@@ -82,7 +82,20 @@ class _CardMonthlyPlanState extends State<CardMonthlyPlan> {
                     .toList(),
               ),
               const SizedBox(height: 10),
-              BlueButton(nameButton: 'Suscribete'),
+              BlueButton(
+                nameButton: 'Suscribete',
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/payments_shopping_cart_screen',
+                    arguments: {
+                      'planName': widget.namePlan,
+                      'planType': 'monthly',
+                      'price': widget.price,
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),
