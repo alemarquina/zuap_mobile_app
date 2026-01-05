@@ -82,14 +82,14 @@ class AppDrawer extends StatelessWidget {
                       context,
                       title: 'FAQ',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/faq_screen');
                       },
                     ),
                     _buildMenuItem(
                       context,
                       title: 'Vincular moto',
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushNamed(context, '/vehicle_link_scanner_screen');
                       },
                     ),
                     _buildMenuItem(
