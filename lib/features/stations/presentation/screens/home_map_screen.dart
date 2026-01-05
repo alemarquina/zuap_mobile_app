@@ -37,6 +37,18 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
   bool _showInfoWindow = false;
 
   @override
+  void initState() {
+    super.initState();
+    // Load markers if stations are already loaded
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final stationState = context.read<StationCubit>().state;
+      if (stationState is StationLoaded) {
+        _updateMarkers(stationState.allStations);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppScaffold(
       body: BlocListener<StationCubit, StationState>(
@@ -130,7 +142,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -188,7 +200,12 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                       'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
                 ),
                 const SizedBox(height: 25),
-                const BlueButton(nameButton: 'Pagar'),
+                BlueButton(
+                  nameButton: 'Pagar',
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/station_qr_scanner_screen');
+                  },
+                ),
                 const SizedBox(height: 20),
               ],
             );
