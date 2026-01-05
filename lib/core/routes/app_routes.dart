@@ -6,6 +6,7 @@ import 'package:zuap_mobile_app/features/auth/presentation/forgotten_password.da
 import 'package:zuap_mobile_app/features/battery/presentation/screens/battery_details_screen.dart';
 import 'package:zuap_mobile_app/features/battery/presentation/screens/maintenance_history_screen.dart';
 import 'package:zuap_mobile_app/features/info/presentation/screens/about_us_screen.dart';
+import 'package:zuap_mobile_app/features/info/presentation/screens/faq_screen.dart';
 import 'package:zuap_mobile_app/features/notif/presentation/screens/notifications_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_history_screen.dart';
 import 'package:zuap_mobile_app/features/payments/presentation/screens/payments_plan_screen.dart';
@@ -18,6 +19,8 @@ import 'package:zuap_mobile_app/features/stations/presentation/screens/home_map_
 import 'package:zuap_mobile_app/features/stations/presentation/screens/stations_screen.dart';
 import 'package:zuap_mobile_app/features/stations/presentation/widgets/station_details.dart';
 import 'package:zuap_mobile_app/features/swap/presentation/screens/history_swap_screen.dart';
+import 'package:zuap_mobile_app/features/vehicles/presentation/screens/qr_scanner_screen.dart';
+import 'package:zuap_mobile_app/features/vehicles/presentation/screens/vehicle_link_details_screen.dart';
 
 class AppRoutes {
   static const String splash = '/';
@@ -38,6 +41,9 @@ class AppRoutes {
   static const String statsScreen = '/stats_screen';
   static const String historySwapScreen = '/history_swap_screen';
   static const String paymentsPlanScreen = '/payments_plan_screen';
+  static const String qrScannerScreen = '/qr_scanner_screen';
+  static const String vehicleLinkDetailsScreen = '/vehicle_link_details_screen';
+  static const String faqScreen = '/faq_screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -66,5 +72,8 @@ class AppRoutes {
     statsScreen: (context) => const StatsScreen(),
     historySwapScreen: (context) => const HistorySwapScreen(),
     paymentsPlanScreen: (context) => const PaymentsPlanScreen(),
+    qrScannerScreen: (context) => const QrScannerScreen(),
+    vehicleLinkDetailsScreen: (context) => const VehicleLinkDetailsScreen(), 
+    faqScreen: (context) => const FaqScreen(),
   };
 }
