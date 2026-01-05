@@ -57,26 +57,48 @@ class _FaqScreenState extends State<FaqScreen> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 25,
+                spacing: 35,
                 children: [
-                  Column(                    
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('¿Te quedaste con alguna duda?', style: TextStyle(
-                        fontWeight: FontWeight.w900
-                      ),),
-                      const Text('Comunicate con nuestro equipo de soporte')
+                      const Text(
+                        '¿Te quedaste con alguna duda?',
+                        style: TextStyle(fontWeight: FontWeight.w900),
+                      ),
+                      const Text('Comunicate con nuestro equipo de soporte'),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FloatingActionButton(onPressed: () {}, backgroundColor: AppTheme.acentoColor, child: SvgPicture.asset('assets/images/icon_whatsapp.svg', height: 35)),
-                      FloatingActionButton(onPressed: () {}, backgroundColor: AppTheme.acentoColor, child: SvgPicture.asset('assets/images/icon_mail.svg', height: 35))
+                      ElevatedButton(                        
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.acentoColor,
+                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          
+                        ),
+                        onPressed: () {},
+                        child: SvgPicture.asset(
+                          'assets/images/icon_whatsapp.svg', height: 50,
+                        ),
+                      ),
+                       ElevatedButton(                        
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.acentoColor,
+                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          
+                        ),
+                        onPressed: () {},
+                        child: SvgPicture.asset(
+                          'assets/images/icon_mail.svg', height: 50,
+                        ),
+                      ),
+                      
                     ],
-                  )
+                  ),
                 ],
-              )
+              ),
               // FAQ Items
             ],
           ),
