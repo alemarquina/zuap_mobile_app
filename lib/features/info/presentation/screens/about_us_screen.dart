@@ -44,7 +44,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               'Remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
             style: TextStyle(color: AppTheme.darkGrayColor)),
             SizedBox(height: 30),
-            BlueButton(nameButton: 'Términos y condiciones')
+            BlueButton(nameButton: 'Términos y condiciones', onPressed: () {
+              Navigator.pushNamed(context, '/terms_service_screen');
+            })
           ],
         ),
       ),
