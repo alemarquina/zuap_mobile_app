@@ -107,19 +107,21 @@ class _VehicleLinkDetailsScreenState extends State<VehicleLinkDetailsScreen> {
                         children: [
                           const Text(
                             'Estado de la vinculación',
-                            style: TextStyle(                              
+                            style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: AppTheme.darkColor,
                             ),
                           ),
                           Switch(
                             value: isLinkActive,
-                            onChanged: (value) {
-                              setState(() {
-                                isLinkActive = value;
-                              });
-                            },
-                            activeThumbColor: AppTheme.primaryColor,
+                            onChanged:
+                                null,
+                            activeColor: AppTheme.primaryColor,
+                            activeTrackColor: AppTheme.primaryColor.withValues(
+                              alpha: 0.5,
+                            ),
+                            inactiveThumbColor: Colors.grey[400],
+                            inactiveTrackColor: Colors.grey[300],
                           ),
                         ],
                       ),
@@ -128,18 +130,20 @@ class _VehicleLinkDetailsScreenState extends State<VehicleLinkDetailsScreen> {
                       onTap: () {
                         _showRemoveLinkDialog(context);
                       },
-                      child: Container(                        
+                      child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(
                           vertical: 17,
-                          horizontal: 24
+                          horizontal: 24,
                         ),
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: Text(
                           'Eliminar vinculación',
                           textAlign: TextAlign.start,
-                          style: TextStyle(                                                        
-                          ),
+                          style: TextStyle(),
                         ),
                       ),
                     ),
