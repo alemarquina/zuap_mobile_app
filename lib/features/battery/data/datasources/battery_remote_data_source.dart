@@ -34,6 +34,7 @@ class BatteryMockDataSource implements BatteryRemoteDataSource {
         timeLeft: '8:${(hoursDiference).toString().padLeft(2, '0')} h',
         totalKm: 450 + counter.toDouble(),
         estimatedSavings: 53.30 + (counter * 0.2),
+        maintenanceSavings: (450 + counter.toDouble()) * 0.15, // Estimación temporal
       );
 
       // Enviando datos

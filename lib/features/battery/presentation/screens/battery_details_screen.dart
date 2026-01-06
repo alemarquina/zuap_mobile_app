@@ -23,7 +23,7 @@ class BatteryDetailsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const HeaderNav(titleText: 'Batería'),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Row(
@@ -46,11 +46,11 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
 
                   // Tarjeta Nivel de Bataría
                   Container(
-                    height: 180,
+                    height: 160,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -108,11 +108,11 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 25),
 
                   // Recorrido, tiempo y termómetro
                   Container(
-                    height: 180,
+                    height: 140,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -163,7 +163,7 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
 
                   // Data inferior
                   const Align(
@@ -199,9 +199,16 @@ class BatteryDetailsScreen extends StatelessWidget {
                             ? state.battery.estimatedSavings
                             : null,
                       ),
+                      const SizedBox(height: 20),
+                      _buildMaintenanceSavingsWidget(
+                        state is! BatteryLoaded,
+                        state is BatteryLoaded
+                            ? state.battery.maintenanceSavings
+                            : null,
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 25),
 
                   BlueButton(
                     nameButton: 'Historial de Cambios',
@@ -223,7 +230,7 @@ class BatteryDetailsScreen extends StatelessWidget {
   Widget _buildInfoBox(String title, String? value) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20),
+        padding: EdgeInsets.symmetric(vertical: 15),
         height: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -274,6 +281,58 @@ class BatteryDetailsScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w900),
               ),
               Text('vs gasolina'),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Text(
+                'Has ahorrado',
+                style: TextStyle(fontSize: 12, color: AppTheme.darkGrayColor),
+              ),
+              const SizedBox(height: 3),
+              _DataOrSkeleton(
+                isLoading: isLoading,
+                width: 100,
+                height: 30,
+                child: Text(
+                  savings != null ? 'S/ ${savings.toStringAsFixed(2)}' : '',
+                  style: const TextStyle(
+                    color: AppTheme.darkColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMaintenanceSavingsWidget(bool isLoading, double? savings) {
+    return Container(
+      height: 90,
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Ahorro estimado',
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
+              Text('vs mantenimiento'),
             ],
           ),
           Column(
