@@ -91,7 +91,7 @@ zuap_mobile_app/
 ├── analysis_options.yaml
 ├── pubspec.lock
 ├── pubspec.yaml
-└── zuap_mobiel_app.iml
+└── zuap_mobile_app.iml
 ```
              
 * **Software Company**: Digilab
