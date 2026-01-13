@@ -10,6 +10,18 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
+    // Load API keys from .env file
+    val envFile = rootProject.file(".env")
+    val mapsApiKey = if (envFile.exists()) {
+        envFile.readLines()
+            .firstOrNull { it.startsWith("MAPS_API_KEY=") }
+            ?.substringAfter("MAPS_API_KEY=")
+            ?.trim()
+            ?: ""
+    } else {
+        ""
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -28,6 +40,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        // Inject API keys into AndroidManifest
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
