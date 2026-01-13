@@ -31,7 +31,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
 
   Set<Marker> _markers = {};
   GoogleMapController? _mapController;
-  
+
   // Estado para el custom InfoWindow
   Station? _selectedStation;
   bool _showInfoWindow = false;
@@ -103,7 +103,12 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
 
             const Positioned(top: 50, right: 16, child: MapOverlayButtons()),
 
-            Positioned(left: 0, right: 0, bottom: 0, child: _buildBottomPanel()),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: _buildBottomPanel(),
+            ),
           ],
         ),
       ),
@@ -116,7 +121,9 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
         return Marker(
           markerId: MarkerId(station.id),
           position: station.location,
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+            BitmapDescriptor.hueGreen,
+          ),
           onTap: () {
             setState(() {
               _selectedStation = station;
@@ -153,6 +160,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
         child: BlocBuilder<BatteryCubit, BatteryState>(
           builder: (context, state) {
             return Column(
+              spacing: 15,
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Hedaer Detalles de Batería
@@ -184,29 +192,30 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                
                 // Battery Level + Stats Row
                 _buildBatteryStatsRow(state),
-                
-                const SizedBox(height: 15),
                 const Divider(color: Colors.grey, thickness: 1.5),
-                const SizedBox(height: 15),
-                
                 // Banner Estación
-                StationPromoBanner(
-                  title: '¡Nueva estación habilitada!',
-                  description:
-                      'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
+                Column(
+                  spacing: 30,
+                  children: [
+                    StationPromoBanner(
+                      title: '¡Nueva estación habilitada!',
+                      description:
+                          'Encuéntrala en Av. La Marina y obtén S/ 5 de descuento hoy.',
+                    ),
+
+                    BlueButton(
+                      nameButton: 'Zuapea aquí',
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/station_qr_scanner_screen',
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 25),
-                BlueButton(
-                  nameButton: 'Zuapea aquí',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/station_qr_scanner_screen');
-                  },
-                ),
-                const SizedBox(height: 20),
               ],
             );
           },
@@ -216,7 +225,6 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
   }
 
   Widget _buildBatteryStatsRow(BatteryState state) {
-
     if (state is BatteryLoading || state is BatteryInitial) {
       return const Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -225,9 +233,7 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
           SizedBox(
             width: 100,
             height: 100,
-            child: CircularProgressIndicator(
-              color: AppTheme.primaryColor,
-            ),
+            child: CircularProgressIndicator(color: AppTheme.primaryColor),
           ),
         ],
       );
@@ -240,26 +246,20 @@ class _HomeMapScreenState extends State<HomeMapScreen> {
         children: [
           Icon(Icons.error_outline, color: Colors.red, size: 40),
           SizedBox(width: 10),
-          Text(
-            'Error al cargar datos',
-            style: TextStyle(color: Colors.red),
-          ),
+          Text('Error al cargar datos', style: TextStyle(color: Colors.red)),
         ],
       );
     }
 
     if (state is BatteryLoaded) {
       final battery = state.battery;
-      
+
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [          
-          BatteryCircleIndicator(
-            batteryLevel: battery.chargeLevel,
-            size: 120,
-          ),
-          const SizedBox(width: 50),          
+        children: [
+          BatteryCircleIndicator(batteryLevel: battery.chargeLevel, size: 120),
+          const SizedBox(width: 50),
           SavingsStatsCard(
             distanceKm: battery.currentRangeKm,
             savingsAmount: battery.estimatedSavings,
