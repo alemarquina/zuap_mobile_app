@@ -36,15 +36,15 @@ class StationScreen extends StatelessWidget {
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: Column(
+          spacing: 20,
           children: [
             // Header
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 40, 25, 0),
               child: Column(
+                spacing: 20,
                 children: [
-                  const HeaderNav(titleText: 'Estaciones'),
-                  const SizedBox(height: 30),
-                  
+                  const HeaderNav(titleText: 'Estaciones'),                                    
                   // Search button (opens modal)
                   GestureDetector(
                     onTap: () => _showSearchModal(context),
@@ -62,9 +62,10 @@ class StationScreen extends StatelessWidget {
                         ),
                       ),
                       child: Row(
+                        spacing: 15,
                         children: [
                           Icon(Icons.search, color: Colors.grey[400]),
-                          const SizedBox(width: 12),
+                          
                           Text(
                             'Buscar estación',
                             style: TextStyle(
@@ -75,9 +76,7 @@ class StationScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  
+                  ),                                    
                   // Nearby suggestions placeholder
                   BlocBuilder<StationCubit, StationState>(
                     builder: (context, state) {
@@ -96,8 +95,7 @@ class StationScreen extends StatelessWidget {
                       }
                       return const SizedBox.shrink();
                     },
-                  ),
-                  const SizedBox(height: 20),
+                  ),                  
                 ],
               ),
             ),

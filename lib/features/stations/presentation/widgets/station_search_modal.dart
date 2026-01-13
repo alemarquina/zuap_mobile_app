@@ -4,12 +4,10 @@ import 'package:zuap_mobile_app/shared/widgets/button_blue.dart';
 
 /// Modal para buscar y filtrar estaciones
 class StationSearchModal extends StatefulWidget {
-  final Function(String? query, String? district, String? availability) onSearch;
+  final Function(String? query, String? district, String? availability)
+  onSearch;
 
-  const StationSearchModal({
-    super.key,
-    required this.onSearch,
-  });
+  const StationSearchModal({super.key, required this.onSearch});
 
   @override
   State<StationSearchModal> createState() => _StationSearchModalState();
@@ -56,6 +54,7 @@ class _StationSearchModalState extends State<StationSearchModal> {
       ),
       padding: const EdgeInsets.all(25),
       child: Column(
+        spacing: 20,
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,11 +68,9 @@ class _StationSearchModalState extends State<StationSearchModal> {
               fontFamily: 'Inter',
             ),
           ),
-          const SizedBox(height: 25),
 
           // Campo de búsqueda
           _buildSearchField(),
-          const SizedBox(height: 20),
 
           // Dropdown Distrito
           _buildDropdown(
@@ -86,7 +83,6 @@ class _StationSearchModalState extends State<StationSearchModal> {
               });
             },
           ),
-          const SizedBox(height: 25),
 
           // Dropdown Disponibilidad
           _buildDropdown(
@@ -99,7 +95,6 @@ class _StationSearchModalState extends State<StationSearchModal> {
               });
             },
           ),
-          const SizedBox(height: 30),
 
           // Botón Buscar
           SizedBox(
@@ -108,7 +103,9 @@ class _StationSearchModalState extends State<StationSearchModal> {
               nameButton: 'Buscar',
               onPressed: () {
                 widget.onSearch(
-                  _searchController.text.isEmpty ? null : _searchController.text,
+                  _searchController.text.isEmpty
+                      ? null
+                      : _searchController.text,
                   _selectedDistrict,
                   _selectedAvailability,
                 );
@@ -116,7 +113,6 @@ class _StationSearchModalState extends State<StationSearchModal> {
               },
             ),
           ),
-          const SizedBox(height: 10),
         ],
       ),
     );
@@ -124,6 +120,7 @@ class _StationSearchModalState extends State<StationSearchModal> {
 
   Widget _buildSearchField() {
     return Column(
+      spacing: 20,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
@@ -133,8 +130,7 @@ class _StationSearchModalState extends State<StationSearchModal> {
             color: AppTheme.darkGrayColor,
             fontWeight: FontWeight.w500,
           ),
-        ),
-        const SizedBox(height: 15),
+        ),        
         TextField(
           controller: _searchController,
           decoration: InputDecoration(
@@ -142,7 +138,7 @@ class _StationSearchModalState extends State<StationSearchModal> {
             hintStyle: TextStyle(
               color: Colors.black45,
               fontSize: 14,
-              letterSpacing: 0              
+              letterSpacing: 0,
             ),
             filled: true,
             fillColor: AppTheme.bgColor,
@@ -177,7 +173,7 @@ class _StationSearchModalState extends State<StationSearchModal> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 20),
         Container(
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -189,7 +185,10 @@ class _StationSearchModalState extends State<StationSearchModal> {
             child: DropdownButton<String>(
               value: value,
               isExpanded: true,
-              icon: const Icon(Icons.keyboard_arrow_down, color: AppTheme.darkGrayColor),
+              icon: const Icon(
+                Icons.keyboard_arrow_down,
+                color: AppTheme.darkGrayColor,
+              ),
               items: items.map((String item) {
                 return DropdownMenuItem<String>(
                   value: item,
@@ -197,7 +196,9 @@ class _StationSearchModalState extends State<StationSearchModal> {
                     item,
                     style: TextStyle(
                       fontSize: 14,
-                      color: item == 'TODOS' ? Colors.grey[600] : AppTheme.darkColor,
+                      color: item == 'TODOS'
+                          ? Colors.grey[600]
+                          : AppTheme.darkColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
