@@ -39,8 +39,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
             child: Column(
+              spacing: 40,
               children: [
                 Stack(
                   children: [
@@ -70,52 +71,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                   ],
-                ),
-                SizedBox(height: 60),
+                ),                
                 // Registro de moto
-                Padding(
-                  padding: EdgeInsetsGeometry.only(),
-                  child: Column(
-                    children: [
-                      CustTextField(
-                        labelText: 'Correo electrónico',
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      SizedBox(height: 30),
-                      CustTextField(
-                        labelText: 'Nombres',
-                        controller: _nameController,
-                        keyboardType: TextInputType.name,
-                      ),
-                      SizedBox(height: 30),
-                      CustTextField(
-                        labelText: 'Apellidos',
-                        controller: _surnameController,
-                        keyboardType: TextInputType.name,
-                      ),
-                      SizedBox(height: 30),
-                      CustomDropdown(
-                        labelText: 'Tipo de documento',
-                        options: RegisterFormOptions.documentTypes,
-                        value: _selectedDocument,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _selectedDocument = newValue;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 30),
-                      CustTextField(
-                        labelText: 'Número de documento',
-                        controller: _numDocController,
-                        keyboardType: TextInputType.number,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 45),
                 Column(
+                  spacing: 25,
+                  children: [
+                    CustTextField(
+                      labelText: 'Correo electrónico',
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),                    
+                    CustTextField(
+                      labelText: 'Nombres',
+                      controller: _nameController,
+                      keyboardType: TextInputType.name,
+                    ),                    
+                    CustTextField(
+                      labelText: 'Apellidos',
+                      controller: _surnameController,
+                      keyboardType: TextInputType.name,
+                    ),                    
+                    CustomDropdown(
+                      labelText: 'Tipo de documento',
+                      options: RegisterFormOptions.documentTypes,
+                      value: _selectedDocument,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedDocument = newValue;
+                        });
+                      },
+                    ),                    
+                    CustTextField(
+                      labelText: 'Número de documento',
+                      controller: _numDocController,
+                      keyboardType: TextInputType.number,
+                    ),
+                  ],
+                ),
+                Column(
+                  spacing: 30,
                   children: [
                     Center(
                       child: Padding(
@@ -129,8 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 40),
+                    ),                    
                     CustomDropdown(
                       labelText: 'Modelo',
                       options: RegisterFormOptions.scooterModels,
@@ -140,8 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           _selectedModelScooter = newValue;
                         });
                       },
-                    ),
-                    SizedBox(height: 30),
+                    ),                    
                     Container(
                       padding: EdgeInsets.all(0),
                       height: 340,
@@ -154,16 +146,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           alignment: Alignment.topCenter,
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30),
+                    ),                    
                     CustTextField(
                       labelText: 'Número de placa',
                       controller: _plateController,
                       keyboardType: TextInputType.number,
                     ),
                   ],
-                ),
-                SizedBox(height: 45),
+                ),                
                 // Botón Registrate
                 ButtonTransparent(
                   nameButton: 'Registrase',

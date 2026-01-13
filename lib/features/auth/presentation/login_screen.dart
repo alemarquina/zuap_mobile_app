@@ -29,11 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(height: 10),
+              spacing: 50,
+              children: [                
                 const Text(
                   'Iniciar Sesión',
                   style: TextStyle(
@@ -41,8 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.w900,
                   ),
-                ),
-                SizedBox(height: 60),
+                ),                
                 Container(
                   padding: EdgeInsets.all(0),
                   height: 340,
@@ -56,21 +55,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                
                 Column(
+                  spacing: 30,
                   children: [
                     CustTextField(
                       labelText: 'Usuario',
                       controller: _userNameController,
                       keyboardType: TextInputType.name,
-                    ),
-                    SizedBox(height: 30),
+                    ),                    
                     CustTextField(
                       labelText: 'Contraseña',
                       controller: _passwordController,
                       obscureText: true,
-                    ),
-                    SizedBox(height: 30),
+                    ),                    
                     Align(
                       alignment: AlignmentGeometry.topRight,
                       child: ElevatedButton(
@@ -100,15 +98,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ],
-                ),
-                SizedBox(height: 30),
+                ),                
                 Column(
+                  spacing: 30,
                   children: [
                     BlueButton(
                       nameButton: 'Iniciar Sesión',
                       routeName: '/home_map_screen',
-                    ),
-                    SizedBox(height: 30),
+                    ),                    
                     ButtonTransparent(
                       nameButton: 'Crear cuenta',
                       routeName: '/register',

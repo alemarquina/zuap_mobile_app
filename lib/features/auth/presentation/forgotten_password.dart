@@ -25,8 +25,9 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 40),
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 35),
           child: Column(
+            spacing: 45,
             children: [
               Stack(
                 children: [
@@ -57,9 +58,9 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
                     ),
                   ),
                 ],
-              ),
-              SizedBox(height: 50),
+              ),              
               Column(
+                spacing: 30,
                 children: [
                   Align(
                     alignment: Alignment.centerLeft,
@@ -82,14 +83,12 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
                         ],
                       ),
                     ),
-                  ),
-                  SizedBox(height: 30),
+                  ),                  
                   CustTextField(
                     labelText: 'Correo electrónico',
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(height: 30),
+                  ),                 
                   BlueButton(
                     nameButton: 'Enviar',
                     onPressed: () {
