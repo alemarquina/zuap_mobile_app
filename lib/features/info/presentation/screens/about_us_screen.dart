@@ -17,37 +17,36 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
     return AppScaffold(
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-          children: [
-            HeaderNav(titleText: 'Sobre nosotros'),
-            SizedBox(height: 35),          
-             Container(
-                  padding: EdgeInsets.all(0),
-                  height: 340,
-                  width: double.infinity,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      'https://i.blogs.es/58eaaa/seat-mo_37_hq/450_1000.jpg',
-                      fit: BoxFit.cover,
-                      alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 35),
+          child: Column(
+            spacing: 30,
+            children: [
+              HeaderNav(titleText: 'Sobre nosotros'),                   
+               Container(
+                    padding: EdgeInsets.all(0),
+                    height: 340,
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        'https://i.blogs.es/58eaaa/seat-mo_37_hq/450_1000.jpg',
+                        fit: BoxFit.cover,
+                        alignment: Alignment.bottomCenter,
+                      ),
                     ),
-                  ),
-                ),
-            SizedBox(height: 35),
-            Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. has survived not only five centuries, but also the leap into electronic typesetting',
-            style: TextStyle(color: AppTheme.darkGrayColor)),
-            SizedBox(height: 15),
-            Text(
-              'Remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-            style: TextStyle(color: AppTheme.darkGrayColor)),
-            SizedBox(height: 30),
-            BlueButton(nameButton: 'Términos y condiciones', onPressed: () {
-              Navigator.pushNamed(context, '/terms_service_screen');
-            })
-          ],
+                  ),              
+              Text(
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. has survived not only five centuries, but also the leap into electronic typesetting',
+              style: TextStyle(color: AppTheme.darkGrayColor)),              
+              Text(
+                'Remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+              style: TextStyle(color: AppTheme.darkGrayColor)),              
+              BlueButton(nameButton: 'Términos y condiciones', onPressed: () {
+                Navigator.pushNamed(context, '/terms_service_screen');
+              }),
+            ],
+          ),
         ),
       ),
     );
