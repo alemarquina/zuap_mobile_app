@@ -21,9 +21,9 @@ class BatteryDetailsScreen extends StatelessWidget {
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
               child: Column(
+                spacing: 25,
                 children: [
-                  const HeaderNav(titleText: 'Batería'),
-                  const SizedBox(height: 20),
+                  const HeaderNav(titleText: 'Batería'),                  
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Row(
@@ -46,8 +46,6 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-
                   // Tarjeta Nivel de Bataría
                   Container(
                     height: 160,
@@ -62,9 +60,9 @@ class BatteryDetailsScreen extends StatelessWidget {
                       children: [
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: 5,
                           children: [
-                            const Text('Nivel de batería'),
-                            const SizedBox(height: 5),
+                            const Text('Nivel de batería'),                            
                             Row(
                               children: [
                                 const Text(
@@ -108,8 +106,6 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 25),
-
                   // Recorrido, tiempo y termómetro
                   Container(
                     height: 140,
@@ -119,6 +115,7 @@ class BatteryDetailsScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Row(
+                      spacing: 20,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildInfoBox(
@@ -126,15 +123,13 @@ class BatteryDetailsScreen extends StatelessWidget {
                           state is BatteryLoaded
                               ? '${state.battery.currentRangeKm.toStringAsFixed(0)} Km'
                               : null,
-                        ),
-                        const SizedBox(width: 20),
+                        ),                        
                         _buildInfoBox(
                           'Tiempo útil',
                           state is BatteryLoaded
                               ? state.battery.timeLeft
                               : null,
-                        ),
-                        const SizedBox(width: 20),
+                        ),                        
                         Expanded(
                           child: Container(
                             height: double.infinity,                            
@@ -163,8 +158,6 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-
                   // Data inferior
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -183,23 +176,20 @@ class BatteryDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-
                   // Stats Mensuales
                   Column(
+                    spacing: 20,
                     children: [
                       _buildKmWidget(
                         state is! BatteryLoaded,
                         state is BatteryLoaded ? state.battery.totalKm : null,
                       ),
-                      const SizedBox(height: 20),
                       _buildSavingsWidget(
                         state is! BatteryLoaded,
                         state is BatteryLoaded
                             ? state.battery.estimatedSavings
                             : null,
-                      ),
-                      const SizedBox(height: 20),
+                      ),                      
                       _buildMaintenanceSavingsWidget(
                         state is! BatteryLoaded,
                         state is BatteryLoaded
@@ -207,9 +197,7 @@ class BatteryDetailsScreen extends StatelessWidget {
                             : null,
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 25),
-
+                  ),                  
                   BlueButton(
                     nameButton: 'Historial de Cambios',
                     onPressed: () {
