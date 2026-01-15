@@ -41,7 +41,6 @@ class _StatsScreenState extends State<StatsScreen> {
                     }),
                   },
                 ),
-
                 CardStats(
                   numSwap: 4,
                   kmTraveled: 70,
@@ -70,8 +69,7 @@ class _StatsScreenState extends State<StatsScreen> {
                   values: [60, 85, 45, 95, 70, 55, 80, 40, 75, 65, 50, 90],
                   primaryColor: AppTheme.primaryColor,
                   secondaryColor: AppTheme.acentoColor,
-                ),
-                const SizedBox(height: 5),
+                ),                
                 BlueButton(
                   nameButton: 'Descargar Reporte',
                   onPressed: () => {Navigator.pop(context)},

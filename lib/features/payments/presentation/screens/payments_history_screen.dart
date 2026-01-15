@@ -20,56 +20,58 @@ class _PaymentsHistoryScreenState extends State<PaymentsHistoryScreen> {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Column(
+            spacing: 30,
             children: [
               HeaderNav(titleText: 'Historial de Pagos'),
-              const SizedBox(height: 40),
-              Align(
-                alignment: AlignmentGeometry.centerLeft,
-                child: Text(
-                  'Desde',
-                  style: TextStyle(fontWeight: FontWeight.w900),
-                ),
+              Column(
+                children: [
+                  Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Text(
+                      'Desde',
+                      style: TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Text('20/09/25 - 20/10/25'),
+                  ),
+                ],
               ),
-              const SizedBox(height: 5),
-              Align(
-                alignment: AlignmentGeometry.centerLeft,
-                child: Text('20/09/25 - 20/10/25'),
-              ),
-              const SizedBox(height: 30),
-              ContainerHistoryPay(
-                station: 'Estación 01',
-                descrip: '3890 Poplar Dr.',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              ContainerHistoryPay(
-                station: 'Estación 01',
-                descrip: '3890 Poplar Dr.',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              ContainerHistoryPay(
-                station: 'Estación 01',
-                descrip: '3890 Poplar Dr.',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              ContainerHistoryPay(
-                station: 'Estación 01',
-                descrip: '3890 Poplar Dr.',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              ContainerHistoryPay(
-                station: 'Estación 01',
-                descrip: '3890 Poplar Dr.',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              ContainerHistoryPay(
-                station: 'Estación 01',
-                descrip: '3890 Poplar Dr.',
-                amount: 20,
+              Column(
+                spacing: 15,
+                children: [
+                  ContainerHistoryPay(
+                    station: 'Estación 01',
+                    descrip: '3890 Poplar Dr.',
+                    amount: 20,
+                  ),
+                  ContainerHistoryPay(
+                    station: 'Estación 01',
+                    descrip: '3890 Poplar Dr.',
+                    amount: 20,
+                  ),
+                  ContainerHistoryPay(
+                    station: 'Estación 01',
+                    descrip: '3890 Poplar Dr.',
+                    amount: 20,
+                  ),
+                  ContainerHistoryPay(
+                    station: 'Estación 01',
+                    descrip: '3890 Poplar Dr.',
+                    amount: 20,
+                  ),
+                  ContainerHistoryPay(
+                    station: 'Estación 01',
+                    descrip: '3890 Poplar Dr.',
+                    amount: 20,
+                  ),
+                  ContainerHistoryPay(
+                    station: 'Estación 01',
+                    descrip: '3890 Poplar Dr.',
+                    amount: 20,
+                  ),
+                ],
               ),
             ],
           ),

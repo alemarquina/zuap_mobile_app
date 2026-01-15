@@ -19,10 +19,11 @@ class _GoalsScreenState extends State<GoalsScreen> {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Column(
+            spacing: 30,
             children: [
               HeaderNav(titleText: 'Mis logros'),
-              const SizedBox(height: 40),
               Row(
+                spacing: 30,
                 children: [
                   Expanded(
                     child: Container(
@@ -43,7 +44,6 @@ class _GoalsScreenState extends State<GoalsScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 30),
                   Expanded(
                     child: Container(
                       height: 150,
@@ -62,18 +62,32 @@ class _GoalsScreenState extends State<GoalsScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
-              ContainerGoalsUser(title: 'Rider Constante', descrip: '22 días seguidos usando el servicio'),
-              const SizedBox(height: 20),
-              ContainerGoalsUser(title: 'Maestro del intercambio', descrip: '50 intercambios realizados'),
-              const SizedBox(height: 20),
-              ContainerGoalsUser(title: 'Guardían del bolsillo', descrip: 'Ahorra de más de S/100 en energía'),
-              const SizedBox(height: 20),
-              ContainerGoalsUser(title: 'Héroe del planeta', descrip: 'Mantuviste buena salud de batería durante 30 días'),
-              const SizedBox(height: 20),
-              ContainerGoalsUser(title: 'Explorador urbano', descrip: 'Visitaste 15 estaciones distintas'),              
-
-              
+              Column(
+                spacing: 20,
+                children: [
+                  ContainerGoalsUser(
+                    title: 'Rider Constante',
+                    descrip: '22 días seguidos usando el servicio',
+                  ),
+                  ContainerGoalsUser(
+                    title: 'Maestro del intercambio',
+                    descrip: '50 intercambios realizados',
+                  ),
+                  ContainerGoalsUser(
+                    title: 'Guardían del bolsillo',
+                    descrip: 'Ahorra de más de S/100 en energía',
+                  ),
+                  ContainerGoalsUser(
+                    title: 'Héroe del planeta',
+                    descrip:
+                        'Mantuviste buena salud de batería durante 30 días',
+                  ),
+                  ContainerGoalsUser(
+                    title: 'Explorador urbano',
+                    descrip: 'Visitaste 15 estaciones distintas',
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -83,7 +97,6 @@ class _GoalsScreenState extends State<GoalsScreen> {
 }
 
 class ContainerGoalsUser extends StatefulWidget {
-  
   final String title;
   final String descrip;
 
@@ -100,8 +113,8 @@ class ContainerGoalsUser extends StatefulWidget {
 class _ContainerGoalsUserState extends State<ContainerGoalsUser> {
   @override
   Widget build(BuildContext context) {
-    return Container(      
-      width: double.infinity,    
+    return Container(
+      width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -111,12 +124,8 @@ class _ContainerGoalsUserState extends State<ContainerGoalsUser> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.title, style: TextStyle(
-            fontWeight: FontWeight.w900
-          ),),
-          Text(widget.descrip, style: TextStyle(
-            color: AppTheme.darkGrayColor
-          ),)
+          Text(widget.title, style: TextStyle(fontWeight: FontWeight.w900)),
+          Text(widget.descrip, style: TextStyle(color: AppTheme.darkGrayColor)),
         ],
       ),
     );

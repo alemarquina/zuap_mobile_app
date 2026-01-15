@@ -20,57 +20,59 @@ class _MaintenanceHistoryScreenState extends State<MaintenanceHistoryScreen> {
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Column(
+            spacing: 30,
             children: [
               HeaderNav(titleText: 'Historial de mantenimiento'),
-              const SizedBox(height: 40),
-              Align(
-                alignment: AlignmentGeometry.centerLeft,
-                child: Text(
-                  'Desde',
-                  style: TextStyle(fontWeight: FontWeight.w900),
-                ),
+              Column(
+                children: [
+                  Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Text(
+                      'Desde',
+                      style: TextStyle(fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentGeometry.centerLeft,
+                    child: Text('20/09/25 - 20/10/25'),
+                  ),
+                ],
               ),
-              const SizedBox(height: 5),
-              Align(
-                alignment: AlignmentGeometry.centerLeft,
-                child: Text('20/09/25 - 20/10/25'),
+              Column(
+                spacing: 20,
+                children: [
+                  CardMaintenance(
+                    walt: 'Wisteria Lane 99',
+                    descrip:
+                        'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
+                    amount: 20,
+                  ),
+                  CardMaintenance(
+                    walt: 'Wisteria Lane 99',
+                    descrip:
+                        'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
+                    amount: 20,
+                  ),
+                  CardMaintenance(
+                    walt: 'Wisteria Lane 99',
+                    descrip:
+                        'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
+                    amount: 20,
+                  ),
+                  CardMaintenance(
+                    walt: 'Wisteria Lane 99',
+                    descrip:
+                        'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
+                    amount: 20,
+                  ),
+                  CardMaintenance(
+                    walt: 'Wisteria Lane 99',
+                    descrip:
+                        'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
+                    amount: 20,
+                  ),
+                ],
               ),
-              const SizedBox(height: 30),
-              CardMaintenance(
-                walt: 'Wisteria Lane 99',
-                descrip:
-                    'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              CardMaintenance(
-                walt: 'Wisteria Lane 99',
-                descrip:
-                    'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              CardMaintenance(
-                walt: 'Wisteria Lane 99',
-                descrip:
-                    'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              CardMaintenance(
-                walt: 'Wisteria Lane 99',
-                descrip:
-                    'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
-              CardMaintenance(
-                walt: 'Wisteria Lane 99',
-                descrip:
-                    'Lorem ipsum dolor ist amet, cosectetur adipiscing elit',
-                amount: 20,
-              ),
-              const SizedBox(height: 15),
             ],
           ),
         ),
