@@ -18,7 +18,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       backgroundColor: AppTheme.bgColor,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 35),
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 30),
           child: Column(
             spacing: 30,
             children: [
