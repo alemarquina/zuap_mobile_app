@@ -33,14 +33,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
           child: Column(
+            spacing: 30,
             children: [
               HeaderNav(titleText: 'Perfil de Usuario'),
-              const SizedBox(height: 45),
               SelectOptionButton(
                 selectedView: _selectedView,
                 onViewChanged: _onViewChanged,
               ),
-              const SizedBox(height: 40),
               IndexedStack(
                 index: _selectedView == ProfileViewType.usuario ? 0 : 1,
                 children: const [UserProfileView(), MotoProfileView()],
@@ -158,7 +157,9 @@ class _UserProfileViewState extends State<UserProfileView> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController(text: 'juliancasablancas@gmail.com');
+    _emailController = TextEditingController(
+      text: 'juliancasablancas@gmail.com',
+    );
     _nameController = TextEditingController(text: 'Julian');
     _surnameController = TextEditingController(text: 'Casablancas');
     _numPhoneController = TextEditingController(text: '23232323');
@@ -180,10 +181,11 @@ class _UserProfileViewState extends State<UserProfileView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 20,
       children: [
         Container(
           width: 210,
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 5),
           child: ClipOval(
             child: Image.network(
               'https://cdn.filestackcontent.com/gVx98UWFQaKBWTGAjZD7',
@@ -205,33 +207,41 @@ class _UserProfileViewState extends State<UserProfileView> {
             ),
           ),
         ),
-        const SizedBox(height: 40),
-        CustTextField(labelText: 'Correo', controller: _emailController, keyboardType: TextInputType.emailAddress,),
-        const SizedBox(height: 30),
-        CustTextField(labelText: 'Nombres', controller: _nameController),
-        const SizedBox(height: 30),
-        CustTextField(labelText: 'Apellidos', controller: _surnameController),
-        const SizedBox(height: 30),
-        CustTextField(
-          labelText: 'Telefono',
-          controller: _numPhoneController,
-          keyboardType: TextInputType.phone,
+        Column(
+          spacing: 25,
+          children: [
+            CustTextField(
+              labelText: 'Correo',
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            CustTextField(labelText: 'Nombres', controller: _nameController),
+            CustTextField(
+              labelText: 'Apellidos',
+              controller: _surnameController,
+            ),
+            CustTextField(
+              labelText: 'Telefono',
+              controller: _numPhoneController,
+              keyboardType: TextInputType.phone,
+            ),
+            CustomDropdown(
+              labelText: 'Tipo de documento',
+              options: RegisterFormOptions.documentTypes,
+              value: _selectedDocument,
+              onChanged: (newValue) {
+                setState(() {
+                  _selectedDocument = newValue;
+                });
+              },
+            ),
+            CustTextField(
+              labelText: 'N° Documento',
+              controller: _numDocController,
+            ),
+            BlueButton(nameButton: 'Editar Perfil'),
+          ],
         ),
-        const SizedBox(height: 30),
-        CustomDropdown(
-          labelText: 'Tipo de documento',
-          options: RegisterFormOptions.documentTypes,
-          value: _selectedDocument,
-          onChanged: (newValue) {
-            setState(() {
-              _selectedDocument = newValue;
-            });
-          },
-        ),
-        const SizedBox(height: 30),
-        CustTextField(labelText: 'N° Documento', controller: _numDocController),
-        const SizedBox(height: 30),
-        BlueButton(nameButton: 'Editar Perfil'),
       ],
     );
   }
@@ -265,10 +275,10 @@ class _MotoProfileViewState extends State<MotoProfileView> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 20,
       children: [
         Container(
-          width: 210,
-          height: 210,
+          width: 198,          
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -292,19 +302,24 @@ class _MotoProfileViewState extends State<MotoProfileView> {
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(
                   Icons.two_wheeler,
-                  size: 100,
+                  size: 80,
                   color: Colors.grey,
                 );
               },
             ),
           ),
         ),
-        const SizedBox(height: 40),
-        CustTextField(labelText: 'Modelo', controller: _modeloController),
-        const SizedBox(height: 30),
-        CustTextField(labelText: 'Matrícula', controller: _matriculaController),
-        const SizedBox(height: 40),
-        BlueButton(nameButton: 'Editar Perfil')
+        Column(
+          spacing: 25,
+          children: [
+            CustTextField(labelText: 'Modelo', controller: _modeloController),
+            CustTextField(
+              labelText: 'Matrícula',
+              controller: _matriculaController,
+            ),
+            BlueButton(nameButton: 'Editar Perfil'),
+          ],
+        ),
       ],
     );
   }
